@@ -417,6 +417,14 @@
 
     .mentor-card { display: flex; flex-direction: column; gap: 0; }
 
+    .mentor-img {
+      width: 100%; max-width: 320px;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 1.8rem;
+    }
+
     .mentor-img-placeholder {
       width: 100%; max-width: 320px;
       aspect-ratio: 4 / 5;
@@ -807,29 +815,19 @@
 
       <!-- VIDEO TESTIMONIAL -->
       <div class="testimonial-video-wrap">
-        <div class="testimonial-placeholder">
-          <div class="testimonial-placeholder-icon">▶</div>
-          <div class="testimonial-placeholder-label">Video Testimonial</div>
-          <div class="testimonial-placeholder-sub">Replace with embedded video</div>
-        </div>
+        <video controls width="100%" style="display:block;">
+          <source src="testimonial-video-1.mp4" type="video/mp4">
+        </video>
       </div>
 
       <!-- IMAGE TESTIMONIAL 1 -->
       <div class="testimonial-image-placeholder">
-        <div class="testimonial-placeholder">
-          <div class="testimonial-placeholder-icon">◈</div>
-          <div class="testimonial-placeholder-label">Image Testimonial 1</div>
-          <div class="testimonial-placeholder-sub">Replace with screenshot or quote image</div>
-        </div>
+        <img src="testimonial-image-1.jpg" alt="Testimonial" style="width:100%;display:block;">
       </div>
 
       <!-- IMAGE TESTIMONIAL 2 -->
       <div class="testimonial-image-placeholder">
-        <div class="testimonial-placeholder">
-          <div class="testimonial-placeholder-icon">◈</div>
-          <div class="testimonial-placeholder-label">Image Testimonial 2</div>
-          <div class="testimonial-placeholder-sub">Replace with screenshot or quote image</div>
-        </div>
+        <img src="testimonial-image-2.jpg" alt="Testimonial" style="width:100%;display:block;">
       </div>
 
     </div>
@@ -848,10 +846,7 @@
 
       <!-- MENTOR 1 -->
       <div class="mentor-card">
-        <div class="mentor-img-placeholder">
-          <div class="mentor-img-placeholder-icon">◉</div>
-          <div class="mentor-img-placeholder-label">Mentor Photo</div>
-        </div>
+        <img src="michele-skogerboe.jpg" alt="Michele Skogerboe" class="mentor-img">
         <div class="mentor-name">Michele Skogerboe</div>
         <div class="mentor-role">Lead the Room Mentor</div>
         <p class="mentor-bio">Michele designs and delivers experiences that challenge how leaders think, behave, and show up. She doesn't preach from the front of the room — she creates immersive programs that surface hard truths and help leaders practice courage, curiosity, and care. Her work draws from psychology, systems thinking, and human-centered design — always grounded in evidence but translated for real life.</p>
@@ -859,10 +854,7 @@
 
       <!-- MENTOR 2 -->
       <div class="mentor-card">
-        <div class="mentor-img-placeholder">
-          <div class="mentor-img-placeholder-icon">◉</div>
-          <div class="mentor-img-placeholder-label">Mentor Photo</div>
-        </div>
+        <img src="jason-moore.jpg" alt="Jason Moore" class="mentor-img">
         <div class="mentor-name">Jason Moore</div>
         <div class="mentor-role">Lead the Room Mentor</div>
         <p class="mentor-bio">Jason has spent more than two decades facilitating leadership experiences for organisations including Microsoft, HSBC, Netflix, Equinix, Goldman Sachs, and many others — reaching more than 500,000 people across 50+ countries. His style is energising, provocative, and deeply human. He brings both rigour and warmth into the room, and cares as much about what shifts in people as what gets decided.</p>
