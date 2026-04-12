@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lead The Room — The Facilitation Method</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #070a14;
+      --bg-2:        #0c1020;
+      --bg-3:        #101525;
+      --pink:        #e31e54;
+      --pink-glow:   rgba(227,30,84,0.11);
+      --pink-dim:    rgba(227,30,84,0.35);
+      --white:       #f0ede8;
+      --white-dim:   rgba(240,237,232,0.6);
+      --white-faint: rgba(240,237,232,0.12);
+      --rule:        rgba(240,237,232,0.09);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.45;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 4rem;
+      background: rgba(7,10,20,0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.05rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--pink); }
+
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+
+    .nav-deadline { font-size: 0.74rem; color: var(--white-dim); letter-spacing: 0.05em; }
+    .nav-deadline strong { color: var(--pink); }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      background: var(--pink); color: var(--white);
+      padding: 0.65rem 1.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--white); color: var(--bg); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent; color: var(--white);
+      padding: 0.65rem 1.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid var(--white-faint);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--pink); color: var(--pink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 9rem 4rem 5rem; position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--rule) 1px, transparent 1px),
+        linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+      background-size: 80px 80px; pointer-events: none;
+    }
+
+    .hero-glow {
+      position: absolute; top: -150px; right: -150px;
+      width: 650px; height: 650px;
+      background: radial-gradient(circle, var(--pink-glow) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; bottom: -100px; left: 10%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(227,30,84,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; z-index: 2; max-width: 1200px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.74rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--pink); border: 1px solid var(--pink-dim);
+      padding: 0.38rem 0.85rem; margin-bottom: 2.2rem;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--pink); border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    .hero h1 {
+      font-size: clamp(3.8rem, 7.5vw, 8rem); font-weight: 900;
+      line-height: 0.93; margin-bottom: 2.2rem; max-width: 950px;
+    }
+    .hero h1 em { font-style: italic; color: var(--pink); }
+
+    .hero-sub {
+      font-size: 1.15rem; color: var(--white-dim);
+      max-width: 540px; margin-bottom: 2.8rem; line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex; align-items: center; gap: 1.2rem;
+      flex-wrap: wrap; margin-bottom: 2rem;
+    }
+
+    .hero-note { font-size: 0.76rem; color: var(--white-dim); letter-spacing: 0.04em; }
+    .hero-note strong { color: var(--pink); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--rule);
+    }
+    .stat { padding: 2.2rem 2rem; border-right: 1px solid var(--rule); text-align: center; }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      display: block; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 3rem; font-weight: 900; color: var(--pink);
+      line-height: 1; margin-bottom: 0.3rem;
+    }
+    .stat-label { font-size: 0.76rem; color: var(--white-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ── SHARED ── */
+    section { padding: 6rem 4rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .overline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.76rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .overline::before {
+      content: ''; display: block; width: 2rem; height: 2px;
+      background: var(--pink); flex-shrink: 0;
+    }
+
+    h2 { font-size: clamp(2.4rem, 4.5vw, 4rem); font-weight: 800; margin-bottom: 1.5rem; }
+    h2 em { font-style: italic; color: var(--pink); }
+
+    /* ── PROBLEM ── */
+    .problem {
+      background: var(--bg-2);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .problem-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+    }
+    .problem-body p { color: var(--white-dim); margin-bottom: 1.2rem; font-size: 1.02rem; }
+    .problem-quote {
+      border-left: 3px solid var(--pink); padding: 1.4rem 1.8rem;
+      font-style: italic; font-size: 1.1rem; color: var(--white);
+      background: rgba(227,30,84,0.08); margin: 1.8rem 0;
+    }
+
+    /* ── METHOD ── */
+    .method { border-bottom: 1px solid var(--rule); }
+    .method-inner { max-width: 1200px; margin: 0 auto; }
+
+    .method-desc {
+      color: var(--white-dim); font-size: 1.05rem;
+      max-width: 640px; margin-bottom: 3rem;
+    }
+
+    .method-compare {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+    }
+    .compare-col { padding: 2.5rem; background: var(--bg); }
+    .compare-col.active { background: var(--bg-3); }
+
+    .compare-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--white-dim); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .compare-eyebrow.pink-label { color: var(--pink); }
+    .compare-eyebrow::before { content: ''; width: 4px; height: 4px; background: currentColor; border-radius: 50%; }
+
+    .compare-heading {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem;
+      font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem;
+      color: var(--white-dim);
+    }
+    .compare-heading.pink { color: var(--pink); }
+    .compare-sub { font-size: 0.92rem; color: var(--white-dim); }
+
+    .method-footnote { margin-top: 1.5rem; font-size: 0.88rem; color: var(--white-dim); }
+
+    /* ── CURRICULUM ── */
+    .curriculum {
+      background: var(--bg-2);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .curriculum-inner { max-width: 1200px; margin: 0 auto; }
+    .curriculum-header { margin-bottom: 4rem; }
+    .curriculum-header p { color: var(--white-dim); max-width: 520px; margin-top: 0.5rem; }
+
+    .week-item {
+      display: grid; grid-template-columns: 100px 1fr;
+      gap: 3rem; padding: 3rem 0;
+      border-top: 1px solid var(--rule); align-items: start;
+    }
+
+    .week-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 5rem; font-weight: 900; color: var(--pink);
+      line-height: 1; opacity: 0.35; user-select: none;
+    }
+
+    .week-tag {
+      display: inline-block;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--pink); border: 1px solid var(--pink-dim);
+      padding: 0.22rem 0.6rem; margin-bottom: 0.8rem;
+    }
+    .week-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.25rem;
+    }
+    .week-subtitle { color: var(--pink); font-size: 0.92rem; font-weight: 500; margin-bottom: 1rem; }
+    .week-body { color: var(--white-dim); font-size: 0.95rem; margin-bottom: 1.2rem; max-width: 640px; }
+
+    .week-bullets { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; }
+    .week-bullets li { font-size: 0.82rem; color: var(--white-dim); }
+    .week-bullets li::before { content: '→ '; color: var(--pink); }
+
+    /* ── FIELD GUIDE ── */
+    .field-guide {
+      background: var(--bg-3);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .field-guide-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .field-guide-img-wrap {
+      display: flex; justify-content: center; align-items: center;
+    }
+    .field-guide-img {
+      width: 100%; max-width: 360px;
+      filter: drop-shadow(0 40px 60px rgba(0,0,0,0.6));
+    }
+    .field-guide-content h2 { margin-bottom: 1rem; }
+    .field-guide-content p {
+      color: var(--white-dim); font-size: 1.02rem;
+      margin-bottom: 1.2rem; max-width: 480px;
+    }
+    .field-guide-detail {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.8rem; color: var(--white-dim);
+      letter-spacing: 0.06em; margin-top: 2rem;
+    }
+    .field-guide-detail::before {
+      content: ''; width: 1.5rem; height: 1px; background: var(--pink);
+    }
+
+    /* ── INCLUDES ── */
+    .includes { border-bottom: 1px solid var(--rule); }
+    .includes-inner { max-width: 1200px; margin: 0 auto; }
+    .includes-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .include-item { padding: 2.5rem; background: var(--bg); transition: background 0.2s; }
+    .include-item:hover { background: var(--bg-2); }
+    .include-icon { font-size: 1.4rem; color: var(--pink); display: block; margin-bottom: 1rem; }
+    .include-item h3 {
+      font-size: 1.05rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; margin-bottom: 0.7rem;
+    }
+    .include-item p { font-size: 0.9rem; color: var(--white-dim); line-height: 1.6; }
+
+    /* ── FOR WHO ── */
+    .for-who {
+      background: var(--bg-2);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .for-who-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    }
+    .for-who-intro p { color: var(--white-dim); margin-bottom: 2rem; }
+    .for-who-list { list-style: none; }
+    .for-who-list li {
+      padding: 0.85rem 0 0.85rem 1.4rem;
+      border-bottom: 1px solid var(--rule);
+      color: var(--white-dim); font-size: 0.95rem; position: relative;
+    }
+    .for-who-list li::before { content: '→'; position: absolute; left: 0; color: var(--pink); }
+
+    .cohort-box {
+      background: var(--bg); border: 1px solid var(--rule);
+      padding: 2.5rem; align-self: start;
+    }
+    .cohort-box h3 { font-size: 1.55rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .cohort-box p { color: var(--white-dim); font-size: 0.95rem; margin-bottom: 1rem; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+    .testimonials-header { margin-bottom: 3rem; }
+    .testimonials-embed { width: 100%; }
+
+    /* ── FOUNDING ── */
+    .founding { border-bottom: 1px solid var(--rule); }
+    .founding-inner { max-width: 1200px; margin: 0 auto; }
+    .founding-intro { color: var(--white-dim); max-width: 620px; margin-bottom: 1rem; }
+    .founding-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .founding-detail { padding: 2rem; background: var(--bg-2); }
+    .founding-detail-label {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--white-dim); margin-bottom: 0.4rem;
+    }
+    .founding-detail-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.45rem; font-weight: 700; text-transform: uppercase; line-height: 1.15;
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-final { background: var(--pink); text-align: center; }
+    .cta-final-inner { max-width: 760px; margin: 0 auto; }
+
+    .cta-final .overline { color: rgba(255,255,255,0.65); justify-content: center; }
+    .cta-final .overline::before { background: rgba(255,255,255,0.65); }
+
+    .cta-final h2 { color: #fff; margin-bottom: 1rem; }
+    .cta-final h2 em { color: rgba(255,255,255,0.75); }
+    .cta-final p { color: rgba(255,255,255,0.78); max-width: 480px; margin: 0 auto 2.5rem; }
+
+    .cta-price { margin-bottom: 2.5rem; }
+    .cta-price-amount {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 5.5rem; font-weight: 900; color: #fff; line-height: 1;
+    }
+    .cta-price-label { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-top: 0.3rem; }
+
+    .btn-cta {
+      background: var(--bg); color: var(--white);
+      padding: 1.1rem 3rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem;
+      border: 2px solid var(--bg); transition: all 0.2s; margin-bottom: 1.5rem;
+    }
+    .btn-cta:hover { background: transparent; color: #fff; border-color: #fff; }
+
+    .cta-deadline { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+    .cta-deadline strong { color: rgba(255,255,255,0.9); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule); padding: 1.8rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.8rem; color: var(--white-dim);
+    }
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .footer-logo span { color: var(--pink); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-deadline { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-bottom: 1px solid var(--rule); }
+      .stat:nth-child(2) { border-right: none; }
+
+      .problem-grid,
+      .field-guide-inner,
+      .for-who-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .method-compare { grid-template-columns: 1fr; }
+      .week-item { grid-template-columns: 70px 1fr; gap: 1.5rem; }
+      .week-number { font-size: 3.5rem; }
+
+      .includes-grid { grid-template-columns: 1fr 1fr; }
+      .founding-grid { grid-template-columns: repeat(2, 1fr); }
+
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .week-item { grid-template-columns: 1fr; }
+      .includes-grid { grid-template-columns: 1fr; }
+      .founding-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">LEAD <span>THE</span> ROOM</div>
+  <div class="nav-right">
+    <span class="nav-deadline">Closes <strong>May 30</strong></span>
+    <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="btn-primary">Secure Your Spot →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Founding Cohort &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Enrollment closes May 30</div>
+    <h1>You're already good.<br>This is how you get <em>exceptional.</em></h1>
+    <p class="hero-sub">The Lead The Room Method is a structured, proven system for experienced facilitators — one that turns the instincts you've built over years into something you can rely on every single time.</p>
+    <div class="hero-actions">
+      <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="btn-primary">Secure Your Spot — £250 →</a>
+      <a href="#programme" class="btn-outline">See the Programme</a>
+    </div>
+    <p class="hero-note">4 Live Labs &nbsp;·&nbsp; 4 Weeks &nbsp;·&nbsp; <strong>£250 Founding Cohort</strong> &nbsp;·&nbsp; Starts June 2</p>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-num">4</span>
+    <span class="stat-label">Live Labs</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">4</span>
+    <span class="stat-label">Weeks</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">90</span>
+    <span class="stat-label">Min per session</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">£250</span>
+    <span class="stat-label">Founding Cohort Price</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="problem-grid">
+    <div>
+      <div class="overline">The Problem</div>
+      <h2>Instinct alone has a <em>ceiling.</em> You've probably already hit it.</h2>
+    </div>
+    <div class="problem-body">
+      <p>You already know some sessions land better than others. But you can't always explain why. Sometimes the room is electric. Decisions get made. People leave energised.</p>
+      <p>Other times, the same format falls flat. The group is polite but passive. You do the work, but nothing really shifts.</p>
+      <div class="problem-quote">"What was different? Was it the group? Was it me? What did I miss?"</div>
+      <p>You've never had a framework to diagnose this. Because nobody teaches facilitation as a system. You've been building your own — session by session, instinct by instinct. That's what got you here. But instinct alone has a ceiling.</p>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="method">
+  <div class="method-inner">
+    <div class="overline">Introducing</div>
+    <h2>The Lead The Room <em>Method</em></h2>
+    <p class="method-desc">A structured system for the craft you've been building by feel. It doesn't replace your experience. It organises it — giving you a framework to understand why your best sessions work, and how to make every session that good.</p>
+
+    <div class="method-compare">
+      <div class="compare-col">
+        <div class="compare-eyebrow">Traditional Facilitation</div>
+        <div class="compare-heading">Managing a process</div>
+        <div class="compare-sub">Keeping things on track. Following the agenda. Managing time.</div>
+      </div>
+      <div class="compare-col active">
+        <div class="compare-eyebrow pink-label">This Method</div>
+        <div class="compare-heading pink">Group Leadership</div>
+        <div class="compare-sub">Moving people — shaping energy, influence, and real outcomes.</div>
+      </div>
+    </div>
+
+    <p class="method-footnote">Most facilitators have never been exposed to this distinction. Once you see it, it changes how you approach every conversation you lead.</p>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum" id="programme">
+  <div class="curriculum-inner">
+    <div class="curriculum-header">
+      <div class="overline">The Complete Method</div>
+      <h2>Four labs. One system.</h2>
+      <p>Each week builds on the last — from the inside out. Confidence first, then energy, then influence, then design.</p>
+    </div>
+
+    <div class="week-item">
+      <div class="week-number">01</div>
+      <div>
+        <span class="week-tag">ConfidenceLab</span>
+        <div class="week-title">Own The Room</div>
+        <div class="week-subtitle">Self-doubt becomes grounded authority.</div>
+        <p class="week-body">Even experienced facilitators feel the ground shift when the stakes rise. The <strong>Four P's of Confidence Framework</strong> gives you a proven, repeatable way to show up with presence — regardless of the room, the audience, or the pressure. Not performance confidence. The real thing.</p>
+        <ul class="week-bullets">
+          <li>The Permission Principle</li>
+          <li>The Practice Loop</li>
+          <li>Six Presence Levers</li>
+          <li>The Positive Expectancy Habit</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="week-item">
+      <div class="week-number">02</div>
+      <div>
+        <span class="week-tag">EnergyLab</span>
+        <div class="week-title">Read The Room</div>
+        <div class="week-subtitle">Reacting to the room becomes reading and moving it.</div>
+        <p class="week-body">The <strong>Group Leadership Energy Map</strong> gives you a simple, reliable way to read the energy of any group. You'll also learn how to widen your own energy range so you can match, mirror, and move any group — not just observe it.</p>
+        <ul class="week-bullets">
+          <li>The Pattern Break</li>
+          <li>The Intentional Check-In</li>
+          <li>The Four Moves Framework</li>
+          <li>The Non-Negotiables Rule</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="week-item">
+      <div class="week-number">03</div>
+      <div>
+        <span class="week-tag">StoryLab</span>
+        <div class="week-title">Influence The Room</div>
+        <div class="week-subtitle">Sharing information becomes influencing understanding.</div>
+        <p class="week-body">The <strong>Core Message Method</strong> is a breakthrough approach to distilling complex ideas into something a room full of people will remember, repeat, and act on. Paired with a powerful storytelling structure, this session gives you the tools to shape decisions — even in rooms full of competing agendas.</p>
+        <ul class="week-bullets">
+          <li>The Three Pillars Rule</li>
+          <li>The Simple BME Story Structure</li>
+          <li>The Playback Technique</li>
+          <li>AI Prompts for message clarity</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="week-item">
+      <div class="week-number">04</div>
+      <div>
+        <span class="week-tag">DesignLab</span>
+        <div class="week-title">Shape The Room</div>
+        <div class="week-subtitle">Running sessions becomes shaping meaningful progress.</div>
+        <p class="week-body">The <strong>See → Be → Do Model</strong> is a completely different approach to session design — one that shapes sessions that don't just inform, but transform. This is the session where everything clicks. You'll leave able to shape any conversation so that real change happens in the room, not after it.</p>
+        <ul class="week-bullets">
+          <li>See → Be → Do Model</li>
+          <li>Session design templates</li>
+          <li>From 1hr meetings to 2-day off-sites</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FIELD GUIDE -->
+<section class="field-guide">
+  <div class="field-guide-inner">
+    <div class="field-guide-img-wrap">
+      <img src="field-guide.png" alt="The Lead The Room Field Guide" class="field-guide-img">
+    </div>
+    <div class="field-guide-content">
+      <div class="overline">Your Method, In Your Hands</div>
+      <h2>The Lead The Room <em>Field Guide</em></h2>
+      <p>A professionally designed workbook shipped directly to your door. Not a PDF. Not a slide deck. A physical guide you can return to between sessions, annotate in the room, and keep on your shelf.</p>
+      <p>It contains the complete method, all exercises, session design templates, and the full AI prompt library — everything you need to put the method into practice the moment the programme ends.</p>
+      <div class="field-guide-detail">Included with every Founding Cohort place &nbsp;·&nbsp; Shipped to you</div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDES -->
+<section class="includes">
+  <div class="includes-inner">
+    <div class="overline">Everything Included</div>
+    <h2>The complete programme.</h2>
+    <div class="includes-grid">
+      <div class="include-item">
+        <span class="include-icon">◈</span>
+        <h3>4 Live Facilitation Labs</h3>
+        <p>ConfidenceLab, EnergyLab, StoryLab, DesignLab. Practitioner sessions where you build the skill in real time with a small group of peers who take this craft as seriously as you do.</p>
+      </div>
+      <div class="include-item">
+        <span class="include-icon">▣</span>
+        <h3>On-Demand Masterclasses</h3>
+        <p>Deeper sessions on confidence patterns, advanced facilitation tactics, the Four Disciplines of a Skillful Facilitator, preparation systems, and using AI as a facilitation partner.</p>
+      </div>
+      <div class="include-item">
+        <span class="include-icon">◈</span>
+        <h3>The Field Guide</h3>
+        <p>A professionally designed workbook shipped to your door. Contains the complete method, exercises, session design templates, and the full AI prompt library.</p>
+      </div>
+      <div class="include-item">
+        <span class="include-icon">◇</span>
+        <h3>Facilitation Tools &amp; Templates</h3>
+        <p>Practical resources you can use immediately in your next session — not theoretical frameworks, but tools built for real rooms.</p>
+      </div>
+      <div class="include-item">
+        <span class="include-icon">◉</span>
+        <h3>AI Prompt Library</h3>
+        <p>Purpose-built prompts for session design, story development, synthesis, and preparation. Sharpen your message in minutes before any session.</p>
+      </div>
+      <div class="include-item">
+        <span class="include-icon">◈</span>
+        <h3>Community Access</h3>
+        <p>An exclusive community of serious facilitators and group leaders who continue to sharpen their craft together — long after the programme ends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="for-who">
+  <div class="for-who-grid">
+    <div class="for-who-intro">
+      <div class="overline">Who This Is For</div>
+      <h2>Built for <em>practitioners.</em></h2>
+      <p>This programme is designed for experienced facilitators who've never had a structured method to match their level.</p>
+      <ul class="for-who-list">
+        <li>Independent facilitators and trainers who want a structured method to match their experience</li>
+        <li>Consultants who lead strategy sessions and want to elevate their impact</li>
+        <li>Workshop leaders who want to be exceptional at their craft</li>
+        <li>L&amp;D professionals who design and deliver group learning experiences</li>
+        <li>Anyone who's been facilitating for years and has never worked on their craft with peers at their level</li>
+      </ul>
+    </div>
+    <div class="cohort-box">
+      <h3>A practitioner cohort — by design.</h3>
+      <p>When was the last time you were in a room with other people who do what you do — at your level — working on the craft itself?</p>
+      <p>For most facilitators, the answer is never.</p>
+      <p>Each cohort is intentionally limited so that every participant gets real practice, real feedback, and real conversation with peers who understand the work.</p>
+      <p>You'll learn the method by experiencing it — because the sessions themselves model the approach.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-header">
+      <div class="overline">From the Pilot Cohort</div>
+      <h2>What participants <em>said.</em></h2>
+    </div>
+    <div class="testimonials-embed">
+      <script type="text/javascript" src="https://testimonial.to/js/iframeResizer.min.js"></script>
+      <iframe id='testimonialto-78ba4131-fc38-47f8-9603-f64eb59a3fe1' src="https://embed-v2.testimonial.to/carousel/all/lead-the-room?id=78ba4131-fc38-47f8-9603-f64eb59a3fe1&theme=dark" frameborder="0" scrolling="no" width="100%"></iframe>
+      <script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, '#testimonialto-78ba4131-fc38-47f8-9603-f64eb59a3fe1');</script>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDING -->
+<section class="founding">
+  <div class="founding-inner">
+    <div class="overline">The Founding Cohort</div>
+    <h2>Only one chance to be <em>first.</em></h2>
+    <p class="founding-intro">As part of our Founding Cohort, you pay only £250 per person for the entire programme. That's a fraction of the standard investment — because we need your help too.</p>
+    <p class="founding-intro">This programme is already great (based on our pilots). But we want it to be exceptional. In exchange for the heavy discount, we want your feedback, your tweaks and commentary. There will only ever be one Founding Cohort.</p>
+    <div class="founding-grid">
+      <div class="founding-detail">
+        <div class="founding-detail-label">Duration</div>
+        <div class="founding-detail-value">4 Weeks</div>
+      </div>
+      <div class="founding-detail">
+        <div class="founding-detail-label">Session Length</div>
+        <div class="founding-detail-value">90 Minutes</div>
+      </div>
+      <div class="founding-detail">
+        <div class="founding-detail-label">Starts</div>
+        <div class="founding-detail-value">June 2, 2026</div>
+      </div>
+      <div class="founding-detail">
+        <div class="founding-detail-label">Time</div>
+        <div class="founding-detail-value">5:30–7:00 PM UK</div>
+      </div>
+      <div class="founding-detail">
+        <div class="founding-detail-label">Format</div>
+        <div class="founding-detail-value">Live Zoom + On-Demand + Field Guide</div>
+      </div>
+      <div class="founding-detail">
+        <div class="founding-detail-label">Enrollment Closes</div>
+        <div class="founding-detail-value">May 30 at Midnight</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="enroll">
+  <div class="cta-final-inner">
+    <div class="overline">Secure Your Spot</div>
+    <h2>Your instincts got you here.<br>A method takes you <em>further.</em></h2>
+    <p>In a world where AI handles more of the work, the facilitators who thrive will be the ones who can do what technology can't: Lead The Room.</p>
+    <div class="cta-price">
+      <div class="cta-price-amount">£250</div>
+      <div class="cta-price-label">Founding Cohort Price — full programme</div>
+    </div>
+    <br>
+    <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="btn-cta">Secure Your Spot →</a>
+    <div class="cta-deadline">Enrollment closes <strong>May 30 at midnight.</strong> Next cohort will be significantly higher.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">LEAD <span>THE</span> ROOM</div>
+  <div>© 2026 AT OUR BEST LTD. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
