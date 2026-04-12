@@ -121,7 +121,7 @@
       pointer-events: none;
     }
 
-    .hero-inner { position: relative; z-index: 2; max-width: 1200px; }
+    .hero-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; text-align: center; }
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: 0.7rem;
@@ -141,17 +141,20 @@
     .hero h1 {
       font-size: clamp(3.8rem, 7.5vw, 8rem); font-weight: 900;
       line-height: 0.93; margin-bottom: 2.2rem; max-width: 950px;
+      margin-left: auto; margin-right: auto;
     }
     .hero h1 em { font-style: italic; color: var(--pink); }
 
     .hero-sub {
       font-size: 1.15rem; color: var(--white-dim);
       max-width: 540px; margin-bottom: 2.8rem; line-height: 1.7;
+      margin-left: auto; margin-right: auto;
     }
 
     .hero-actions {
       display: flex; align-items: center; gap: 1.2rem;
       flex-wrap: wrap; margin-bottom: 2rem;
+      justify-content: center;
     }
 
     .hero-note { font-size: 0.76rem; color: var(--white-dim); letter-spacing: 0.04em; }
@@ -360,7 +363,101 @@
     }
     .testimonials-inner { max-width: 1200px; margin: 0 auto; }
     .testimonials-header { margin-bottom: 3rem; }
-    .testimonials-embed { width: 100%; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .testimonial-video-wrap { grid-column: 1 / -1; }
+
+    .testimonial-placeholder {
+      background: var(--bg-3);
+      border: 1px dashed rgba(240,237,232,0.18);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; position: relative;
+    }
+    .testimonial-video-wrap .testimonial-placeholder { aspect-ratio: 16 / 9; min-height: 200px; }
+    .testimonial-image-placeholder .testimonial-placeholder { aspect-ratio: 4 / 3; }
+
+    .testimonial-placeholder-icon {
+      width: 3rem; height: 3rem;
+      border-radius: 50%;
+      border: 2px solid var(--pink-dim);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--pink); font-size: 1.2rem;
+    }
+    .testimonial-placeholder-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--white-dim);
+    }
+    .testimonial-placeholder-sub {
+      font-size: 0.75rem; color: rgba(240,237,232,0.3);
+    }
+
+    @media (max-width: 600px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── MENTORS ── */
+    .mentors {
+      background: var(--bg-2);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .mentors-inner { max-width: 1200px; margin: 0 auto; }
+    .mentors-header { margin-bottom: 3.5rem; }
+    .mentors-header p { color: var(--white-dim); max-width: 520px; margin-top: 0.5rem; }
+
+    .mentors-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    }
+
+    .mentor-card { display: flex; flex-direction: column; gap: 0; }
+
+    .mentor-img-placeholder {
+      width: 100%; max-width: 320px;
+      aspect-ratio: 4 / 5;
+      background: var(--bg-3);
+      border: 1px dashed rgba(240,237,232,0.18);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.75rem; margin-bottom: 1.8rem;
+    }
+    .mentor-img-placeholder-icon {
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 50%;
+      border: 2px solid var(--pink-dim);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--pink); font-size: 1rem;
+    }
+    .mentor-img-placeholder-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--white-dim);
+    }
+
+    .mentor-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.9rem; font-weight: 800; text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .mentor-role {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 1.2rem;
+    }
+    .mentor-bio {
+      color: var(--white-dim); font-size: 0.95rem;
+      line-height: 1.7; max-width: 420px;
+    }
+
+    @media (max-width: 900px) {
+      .mentors-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
 
     /* ── FOUNDING ── */
     .founding { border-bottom: 1px solid var(--rule); }
@@ -706,10 +803,71 @@
       <div class="overline">From the Pilot Cohort</div>
       <h2>What participants <em>said.</em></h2>
     </div>
-    <div class="testimonials-embed">
-      <script type="text/javascript" src="https://testimonial.to/js/iframeResizer.min.js"></script>
-      <iframe id='testimonialto-78ba4131-fc38-47f8-9603-f64eb59a3fe1' src="https://embed-v2.testimonial.to/carousel/all/lead-the-room?id=78ba4131-fc38-47f8-9603-f64eb59a3fe1&theme=dark" frameborder="0" scrolling="no" width="100%"></iframe>
-      <script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, '#testimonialto-78ba4131-fc38-47f8-9603-f64eb59a3fe1');</script>
+    <div class="testimonials-grid">
+
+      <!-- VIDEO TESTIMONIAL -->
+      <div class="testimonial-video-wrap">
+        <div class="testimonial-placeholder">
+          <div class="testimonial-placeholder-icon">▶</div>
+          <div class="testimonial-placeholder-label">Video Testimonial</div>
+          <div class="testimonial-placeholder-sub">Replace with embedded video</div>
+        </div>
+      </div>
+
+      <!-- IMAGE TESTIMONIAL 1 -->
+      <div class="testimonial-image-placeholder">
+        <div class="testimonial-placeholder">
+          <div class="testimonial-placeholder-icon">◈</div>
+          <div class="testimonial-placeholder-label">Image Testimonial 1</div>
+          <div class="testimonial-placeholder-sub">Replace with screenshot or quote image</div>
+        </div>
+      </div>
+
+      <!-- IMAGE TESTIMONIAL 2 -->
+      <div class="testimonial-image-placeholder">
+        <div class="testimonial-placeholder">
+          <div class="testimonial-placeholder-icon">◈</div>
+          <div class="testimonial-placeholder-label">Image Testimonial 2</div>
+          <div class="testimonial-placeholder-sub">Replace with screenshot or quote image</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MENTORS -->
+<section class="mentors">
+  <div class="mentors-inner">
+    <div class="mentors-header">
+      <div class="overline">Your Guides</div>
+      <h2>Meet the <em>Mentors.</em></h2>
+      <p>The Lead The Room method is taught by practitioners who have spent years in the room — shaping the thinking behind it.</p>
+    </div>
+    <div class="mentors-grid">
+
+      <!-- MENTOR 1 -->
+      <div class="mentor-card">
+        <div class="mentor-img-placeholder">
+          <div class="mentor-img-placeholder-icon">◉</div>
+          <div class="mentor-img-placeholder-label">Mentor Photo</div>
+        </div>
+        <div class="mentor-name">Mentor Name</div>
+        <div class="mentor-role">Role / Title</div>
+        <p class="mentor-bio">Mentor bio and background text will go here. Describe their experience, expertise, and what they bring to the programme.</p>
+      </div>
+
+      <!-- MENTOR 2 -->
+      <div class="mentor-card">
+        <div class="mentor-img-placeholder">
+          <div class="mentor-img-placeholder-icon">◉</div>
+          <div class="mentor-img-placeholder-label">Mentor Photo</div>
+        </div>
+        <div class="mentor-name">Mentor Name</div>
+        <div class="mentor-role">Role / Title</div>
+        <p class="mentor-bio">Mentor bio and background text will go here. Describe their experience, expertise, and what they bring to the programme.</p>
+      </div>
+
     </div>
   </div>
 </section>
