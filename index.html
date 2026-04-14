@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lead the Room | Facilitation Edge</title>
+  <meta property="og:title" content="Lead the Room | Facilitation Edge">
+  <meta name="twitter:title" content="Lead the Room | Facilitation Edge">
+  <meta property="og:site_name" content="Lead the Room">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #070a14;
+      --bg-2:        #0c1020;
+      --bg-3:        #101525;
+      --pink:        #e31e54;
+      --pink-glow:   rgba(227,30,84,0.11);
+      --pink-dim:    rgba(227,30,84,0.35);
+      --white:       #f0ede8;
+      --white-dim:   rgba(240,237,232,0.6);
+      --white-faint: rgba(240,237,232,0.12);
+      --rule:        rgba(240,237,232,0.09);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 22px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.45;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 4rem;
+      background: rgba(7,10,20,0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.05rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--pink); }
+
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+
+    .nav-deadline { font-size: 0.74rem; color: var(--white-dim); letter-spacing: 0.05em; }
+    .nav-deadline strong { color: var(--pink); }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      background: var(--pink); color: #ffffff;
+      padding: 0.65rem 1.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--white); color: var(--bg); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent; color: var(--white);
+      padding: 0.65rem 1.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid var(--white-faint);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--pink); color: var(--pink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 4rem 3.5rem; position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--rule) 1px, transparent 1px),
+        linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+      background-size: 80px 80px; pointer-events: none;
+    }
+
+    .hero-glow {
+      position: absolute; top: -150px; right: -150px;
+      width: 650px; height: 650px;
+      background: radial-gradient(circle, var(--pink-glow) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; bottom: -100px; left: 10%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(227,30,84,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; text-align: center; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.74rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--pink); border: 1px solid var(--pink-dim);
+      padding: 0.38rem 0.85rem; margin-bottom: 2.2rem;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--pink); border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    .hero h1 {
+      font-size: clamp(3.8rem, 7.5vw, 8rem); font-weight: 900;
+      line-height: 0.93; margin-bottom: 2.2rem; max-width: 950px;
+      margin-left: auto; margin-right: auto;
+    }
+    .hero h1 em { font-style: italic; color: var(--pink); }
+
+    .hero-sub {
+      font-size: 1.15rem; color: var(--white-dim);
+      max-width: 540px; margin-bottom: 2.8rem; line-height: 1.7;
+      margin-left: auto; margin-right: auto;
+    }
+
+    .hero-actions {
+      display: flex; align-items: center; gap: 1.2rem;
+      flex-wrap: wrap; margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    .hero-note { font-size: 0.76rem; color: var(--white-dim); letter-spacing: 0.04em; }
+    .hero-note strong { color: var(--pink); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--rule);
+    }
+    .stat { padding: 2.2rem 2rem; border-right: 1px solid var(--rule); text-align: center; }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      display: block; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 3rem; font-weight: 900; color: var(--pink);
+      line-height: 1; margin-bottom: 0.3rem;
+    }
+    .stat-label { font-size: 0.76rem; color: var(--white-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ── SHARED ── */
+    section { padding: 6rem 4rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .overline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.76rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .overline::before {
+      content: ''; display: block; width: 2rem; height: 2px;
+      background: var(--pink); flex-shrink: 0;
+    }
+
+    h2 { font-size: clamp(2.4rem, 4.5vw, 4rem); font-weight: 800; margin-bottom: 1.5rem; }
+    h2 em { font-style: italic; color: var(--pink); }
+
+    /* ── PROBLEM ── */
+    .problem {
+      background: var(--bg-2);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .problem-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+    }
+    .problem-body p { color: var(--white-dim); margin-bottom: 1.2rem; font-size: 1.02rem; }
+    .problem-quote {
+      border-left: 3px solid var(--pink); padding: 1.4rem 1.8rem;
+      font-style: italic; font-size: 1.1rem; color: var(--white);
+      background: rgba(227,30,84,0.08); margin: 1.8rem 0;
+    }
+
+    /* ── METHOD ── */
+    .method { border-bottom: 1px solid var(--rule); }
+    .method-inner { max-width: 1200px; margin: 0 auto; }
+
+    .method-desc {
+      color: var(--white-dim); font-size: 1.05rem;
+      max-width: 640px; margin-bottom: 3rem;
+    }
+
+    .method-compare {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+    }
+    .compare-col { padding: 2.5rem; background: var(--bg); }
+    .compare-col.active { background: var(--bg-3); }
+
+    .compare-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--white-dim); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .compare-eyebrow.pink-label { color: var(--pink); }
+    .compare-eyebrow::before { content: ''; width: 4px; height: 4px; background: currentColor; border-radius: 50%; }
+
+    .compare-heading {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem;
+      font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem;
+      color: var(--white-dim);
+    }
+    .compare-heading.pink { color: var(--pink); }
+    .compare-sub { font-size: 0.92rem; color: var(--white-dim); }
+
+    .method-footnote { margin-top: 1.5rem; font-size: 0.88rem; color: var(--white-dim); }
+
+    /* ── CURRICULUM ── */
+    .curriculum {
+      background: var(--bg-2);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .curriculum-inner { max-width: 1200px; margin: 0 auto; }
+    .curriculum-header { margin-bottom: 4rem; text-align: center; }
+    .curriculum-header h2 { text-transform: none; }
+    .curriculum-header p { color: #ffffff; max-width: 780px; margin: 1rem auto 0; }
+
+    .week-item {
+      display: grid; grid-template-columns: 100px 1fr;
+      gap: 3rem; padding: 3rem 0;
+      border-top: 1px solid var(--rule); align-items: start;
+    }
+
+    .week-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 5rem; font-weight: 900; color: var(--pink);
+      line-height: 1; opacity: 0.35; user-select: none;
+    }
+
+    .week-tag {
+      display: inline-block;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--pink); border: 1px solid var(--pink-dim);
+      padding: 0.22rem 0.6rem; margin-bottom: 0.8rem;
+    }
+    .week-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.25rem;
+    }
+    .week-subtitle { color: var(--pink); font-size: 0.92rem; font-weight: 500; margin-bottom: 1rem; }
+    .week-body { color: var(--white-dim); font-size: 0.95rem; margin-bottom: 1.2rem; max-width: 640px; }
+
+    .week-bullets { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; }
+    .week-bullets li { font-size: 0.82rem; color: var(--white-dim); }
+    .week-bullets li::before { content: '→ '; color: var(--pink); }
+
+    /* ── FIELD GUIDE ── */
+    .field-guide {
+      background: var(--bg-3);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .field-guide-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .field-guide-img-wrap {
+      display: flex; justify-content: center; align-items: center;
+    }
+    .field-guide-img {
+      width: 100%; max-width: 360px;
+      filter: drop-shadow(0 40px 60px rgba(0,0,0,0.6));
+    }
+    .field-guide-content h2 { margin-bottom: 1rem; }
+    .field-guide-content p {
+      color: var(--white-dim); font-size: 1.02rem;
+      margin-bottom: 1.2rem; max-width: 480px;
+    }
+    .field-guide-detail {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.8rem; color: var(--white-dim);
+      letter-spacing: 0.06em; margin-top: 2rem;
+    }
+    .field-guide-detail::before {
+      content: ''; width: 1.5rem; height: 1px; background: var(--pink);
+    }
+
+    /* ── INCLUDES ── */
+    .includes { border-bottom: 1px solid var(--rule); }
+    .includes-inner { max-width: 1200px; margin: 0 auto; }
+    .includes-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .include-item { padding: 2.5rem; background: var(--bg); transition: background 0.2s; }
+    .include-item:hover { background: var(--bg-2); }
+    .include-icon { font-size: 1.4rem; color: var(--pink); display: block; margin-bottom: 1rem; }
+    .include-item h3 {
+      font-size: 1.05rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; margin-bottom: 0.7rem;
+    }
+    .include-item p { font-size: 0.9rem; color: var(--white-dim); line-height: 1.6; }
+
+    /* ── FOR WHO ── */
+    .for-who {
+      background: var(--bg-2);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .for-who-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    }
+    .for-who-intro p { color: var(--white-dim); margin-bottom: 2rem; }
+    .for-who-list { list-style: none; }
+    .for-who-list li {
+      padding: 0.85rem 0 0.85rem 1.4rem;
+      border-bottom: 1px solid var(--rule);
+      color: var(--white-dim); font-size: 0.95rem; position: relative;
+    }
+    .for-who-list li::before { content: '→'; position: absolute; left: 0; color: var(--pink); }
+
+    .cohort-box {
+      background: var(--bg); border: 1px solid var(--rule);
+      padding: 2.5rem; align-self: start;
+    }
+    .cohort-box h3 { font-size: 1.55rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .cohort-box p { color: var(--white-dim); font-size: 0.95rem; margin-bottom: 1rem; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+    .testimonials-header { margin-bottom: 3rem; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .testimonial-video-wrap { grid-column: 1 / -1; }
+
+    .testimonial-placeholder {
+      background: var(--bg-3);
+      border: 1px dashed rgba(240,237,232,0.18);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; position: relative;
+    }
+    .testimonial-video-wrap .testimonial-placeholder { aspect-ratio: 16 / 9; min-height: 200px; }
+    .testimonial-image-placeholder .testimonial-placeholder { aspect-ratio: 4 / 3; }
+
+    .testimonial-placeholder-icon {
+      width: 3rem; height: 3rem;
+      border-radius: 50%;
+      border: 2px solid var(--pink-dim);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--pink); font-size: 1.2rem;
+    }
+    .testimonial-placeholder-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--white-dim);
+    }
+    .testimonial-placeholder-sub {
+      font-size: 0.75rem; color: rgba(240,237,232,0.3);
+    }
+
+    @media (max-width: 600px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── MENTORS ── */
+    .mentors {
+      background: var(--bg-2);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .mentors-inner { max-width: 1200px; margin: 0 auto; }
+    .mentors-header { margin-bottom: 3.5rem; }
+    .mentors-header p { color: var(--white-dim); max-width: 520px; margin-top: 0.5rem; }
+
+    .mentors-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    }
+
+    .mentor-card { display: flex; flex-direction: column; gap: 0; }
+
+    .mentor-img {
+      width: 100%; max-width: 320px;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 1.8rem;
+    }
+
+    .mentor-img-placeholder {
+      width: 100%; max-width: 320px;
+      aspect-ratio: 4 / 5;
+      background: var(--bg-3);
+      border: 1px dashed rgba(240,237,232,0.18);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.75rem; margin-bottom: 1.8rem;
+    }
+    .mentor-img-placeholder-icon {
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 50%;
+      border: 2px solid var(--pink-dim);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--pink); font-size: 1rem;
+    }
+    .mentor-img-placeholder-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--white-dim);
+    }
+
+    .mentor-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.9rem; font-weight: 800; text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .mentor-role {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 1.2rem;
+    }
+    .mentor-bio {
+      color: var(--white-dim); font-size: 0.95rem;
+      line-height: 1.7; max-width: 420px;
+    }
+
+    @media (max-width: 900px) {
+      .mentors-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    /* ── FOUNDING ── */
+    .founding { border-bottom: 1px solid var(--rule); }
+    .founding-inner { max-width: 1200px; margin: 0 auto; }
+    .founding-intro { color: var(--white-dim); max-width: 620px; margin-bottom: 1rem; }
+    .founding-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .founding-detail { padding: 2rem; background: var(--bg-2); }
+    .founding-detail-label {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--white-dim); margin-bottom: 0.4rem;
+    }
+    .founding-detail-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.45rem; font-weight: 700; text-transform: uppercase; line-height: 1.15;
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-final { background: var(--pink); text-align: center; }
+    .cta-final-inner { max-width: 760px; margin: 0 auto; }
+
+    .cta-final .overline { color: rgba(255,255,255,0.65); justify-content: center; }
+    .cta-final .overline::before { background: rgba(255,255,255,0.65); }
+
+    .cta-final h2 { color: #fff; margin-bottom: 1rem; }
+    .cta-final h2 em { color: rgba(255,255,255,0.75); }
+    .cta-final p { color: rgba(255,255,255,0.78); max-width: 480px; margin: 0 auto 2.5rem; }
+
+    .cta-price { margin-bottom: 2.5rem; }
+    .cta-price-amount {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 5.5rem; font-weight: 900; color: #fff; line-height: 1;
+    }
+    .cta-price-label { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-top: 0.3rem; }
+
+    .btn-cta {
+      background: var(--bg); color: var(--white);
+      padding: 1.1rem 3rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem;
+      border: 2px solid var(--bg); transition: all 0.2s; margin-bottom: 1.5rem;
+    }
+    .btn-cta:hover { background: transparent; color: #fff; border-color: #fff; }
+
+    .cta-deadline { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+    .cta-deadline strong { color: rgba(255,255,255,0.9); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule); padding: 1.8rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.8rem; color: var(--white-dim);
+    }
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .footer-logo span { color: var(--pink); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-deadline { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .hero { padding: 5rem 1.5rem 3rem; }
+
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-bottom: 1px solid var(--rule); }
+      .stat:nth-child(2) { border-right: none; }
+
+      .problem-grid,
+      .field-guide-inner,
+      .for-who-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .method-compare { grid-template-columns: 1fr; }
+      .week-item { grid-template-columns: 70px 1fr; gap: 1.5rem; }
+      .week-number { font-size: 3.5rem; }
+
+      .includes-grid { grid-template-columns: 1fr 1fr; }
+      .founding-grid { grid-template-columns: repeat(2, 1fr); }
+
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .week-item { grid-template-columns: 1fr; }
+      .includes-grid { grid-template-columns: 1fr; }
+      .founding-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── LIGHT SECTIONS ── */
+    .section-light {
+      --white:       #0c1020;
+      --white-dim:   #000000;
+      --white-faint: rgba(26,39,68,0.15);
+      --rule:        rgba(0,0,0,0.1);
+      --bg:          #ffffff;
+      --bg-2:        #f5f5f5;
+      --bg-3:        #ebebeb;
+      background: #ffffff;
+      color: #0c1020;
+    }
+    .section-light.hero::before { background-image: none; }
+
+    /* ── LAB CARDS ── */
+    .lab-card {
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.55);
+    }
+    .lab-card-header {
+      background: #131929;
+      padding: 1.6rem 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .lab-card-label {
+      color: var(--pink);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2rem; font-weight: 400;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .lab-card-title {
+      color: #ffffff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.4rem; font-weight: 900; text-transform: uppercase;
+      line-height: 1; margin: 0; letter-spacing: 0.07em;
+    }
+    .lab-card-body {
+      background: #ffffff;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 3rem;
+      padding: 2.5rem;
+      align-items: start;
+    }
+    .lab-card-text > p {
+      color: #000000;
+      margin-bottom: 1.2rem;
+      line-height: 1.7;
+    }
+    .lab-checklist {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    .lab-checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 0.5rem 0;
+      color: #111111;
+      font-size: 1rem;
+      line-height: 1.4;
+      position: static;
+      border: none;
+    }
+    .lab-checklist li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 22px; height: 22px; min-width: 22px;
+      background: rgba(227,30,84,0.1);
+      border: 1.5px solid var(--pink);
+      border-radius: 4px;
+      color: var(--pink);
+      font-size: 0.75rem; font-weight: 900;
+      line-height: 20px; text-align: center;
+      display: inline-block;
+      margin-top: 0.15rem;
+    }
+    .lab-card-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .lab-img-placeholder {
+      width: 100%; aspect-ratio: 4 / 3;
+      background: #f0f0f0;
+      border-radius: 10px;
+      border: 1px dashed rgba(0,0,0,0.18);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.5rem;
+    }
+    .lab-img-placeholder-icon { font-size: 2rem; color: rgba(0,0,0,0.2); }
+    .lab-img-placeholder-label {
+      font-size: 0.68rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(0,0,0,0.3);
+    }
+    .lab-cta {
+      display: block; width: 100%;
+      background: var(--pink); color: #ffffff !important;
+      text-align: center; padding: 1rem 1.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.2rem; font-weight: 800;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .lab-cta:hover { background: #c41748; transform: translateY(-1px); }
+    @media (max-width: 900px) {
+      .lab-card-body { grid-template-columns: 1fr; }
+      .lab-card-right { order: -1; }
+      .lab-card-title { font-size: 1.8rem; }
+    }
+
+    .section-light .mentor-img-placeholder,
+    .section-light .testimonial-placeholder {
+      border-color: rgba(0,0,0,0.18);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">LEAD <span>THE</span> ROOM</div>
+  <div class="nav-right">
+    <span class="nav-deadline">Closes <strong>May 30</strong></span>
+    <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="btn-primary">Secure Your Spot →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero section-light">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Founding Cohort &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Enrollment closes May 30</div>
+    <h1>You're already good.<br>This is how you get <em>exceptional.</em></h1>
+    <p class="hero-sub">The Lead The Room Method is a structured, proven system for professional facilitators — one that turns the instincts you've built over years into something you can rely on every single time.</p>
+    <div class="hero-actions">
+      <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="btn-primary">Secure Your Spot — £250 →</a>
+    </div>
+    <p class="hero-note">4 Live Labs &nbsp;·&nbsp; <strong>£250 Launch Cohort</strong> &nbsp;·&nbsp; Starts June 9, 2026</p>
+  </div>
+</section>
+
+
+<!-- PROBLEM -->
+<section class="problem section-light">
+  <div class="problem-grid">
+    <div>
+      <h2>You don't need another course on how to run a <em>workshop.</em></h2>
+    </div>
+    <div class="problem-body">
+      <p>But here's what even experienced facilitators rarely get:</p>
+      <p>A system.</p>
+      <p>Not a bag of tricks. Not a list of activities. A structured, proven method for leading groups with precision — one that turns the instincts you've built through experience into a repeatable system you can rely on every time.</p>
+      <p>AI can build your agenda, design your slides, and summarise your outputs. But it will never be able to do what you do: walk into a room, read the energy, and move a group of people from stuck to aligned.</p>
+      <p>That human skill is your competitive advantage. And it's about to get a serious upgrade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="method section-light">
+  <div class="method-inner">
+    <h2>The Lead The Room <em>Method</em></h2>
+    <p class="method-desc">A structured system for the craft you've been building by feel. It doesn't replace your experience. It organises it — giving you a framework to understand why your best sessions work, and how to make every session that good.</p>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum" id="programme">
+  <div class="curriculum-inner">
+    <div class="curriculum-header">
+      <h2>How does the 'Lead the Room Facilitation Program' work?</h2>
+      <p>After more than 10,000 hours in the room, we found four things that make a truly great facilitator. First, you build your <strong>CONFIDENCE</strong> — so you can own the room. Then you sharpen your <strong>SKILLS</strong> — so you can influence the room. Next, you become more intentional — so you can read the room. And finally, you master <strong>DESIGN</strong> — so you can shape the room.</p>
+    </div>
+
+    <!-- LAB 1 -->
+    <div class="lab-card">
+      <div class="lab-card-header">
+        <div class="lab-card-label">Confidence Lab</div>
+        <div class="lab-card-title">How to Own the Room</div>
+      </div>
+      <div class="lab-card-body">
+        <div class="lab-card-text">
+          <p>Even experienced facilitators feel the ground shift when the stakes rise. The <strong>Four P's of Confidence Framework</strong> gives you a proven, repeatable way to show up with presence — regardless of the room, the audience, or the pressure. Not performance confidence. The real thing.</p>
+          <ul class="lab-checklist">
+            <li><strong>The Permission Principle</strong></li>
+            <li>The Practice Loop</li>
+            <li><strong>Six Presence Levers</strong></li>
+            <li>The Positive Expectancy Habit</li>
+          </ul>
+        </div>
+        <div class="lab-card-right">
+          <div class="lab-img-placeholder">
+            <div class="lab-img-placeholder-icon">◉</div>
+            <div class="lab-img-placeholder-label">Image Placeholder</div>
+          </div>
+          <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="lab-cta">Join Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAB 2 -->
+    <div class="lab-card">
+      <div class="lab-card-header">
+        <div class="lab-card-label">Skills Lab</div>
+        <div class="lab-card-title">How to Influence the Room</div>
+      </div>
+      <div class="lab-card-body">
+        <div class="lab-card-text">
+          <p>The <strong>Core Message Method</strong> is a breakthrough approach to distilling complex ideas into something a room full of people will remember, repeat, and act on. Paired with a powerful storytelling structure, this session gives you the tools to shape decisions — even in rooms full of competing agendas.</p>
+          <ul class="lab-checklist">
+            <li><strong>The Three Pillars Rule</strong></li>
+            <li>The Simple BME Story Structure</li>
+            <li><strong>The Playback Technique</strong></li>
+            <li>AI Prompts for message clarity</li>
+          </ul>
+        </div>
+        <div class="lab-card-right">
+          <div class="lab-img-placeholder">
+            <div class="lab-img-placeholder-icon">◉</div>
+            <div class="lab-img-placeholder-label">Image Placeholder</div>
+          </div>
+          <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="lab-cta">Join Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAB 3 -->
+    <div class="lab-card">
+      <div class="lab-card-header">
+        <div class="lab-card-label">Energy Lab</div>
+        <div class="lab-card-title">How to Read the Room</div>
+      </div>
+      <div class="lab-card-body">
+        <div class="lab-card-text">
+          <p>The <strong>Group Leadership Energy Map</strong> gives you a simple, reliable way to read the energy of any group. You'll also learn how to widen your own energy range so you can match, mirror, and move any group — not just observe it.</p>
+          <ul class="lab-checklist">
+            <li><strong>The Pattern Break</strong></li>
+            <li>The Intentional Check-In</li>
+            <li><strong>The Four Moves Framework</strong></li>
+            <li>The Non-Negotiables Rule</li>
+          </ul>
+        </div>
+        <div class="lab-card-right">
+          <div class="lab-img-placeholder">
+            <div class="lab-img-placeholder-icon">◉</div>
+            <div class="lab-img-placeholder-label">Image Placeholder</div>
+          </div>
+          <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="lab-cta">Join Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAB 4 -->
+    <div class="lab-card">
+      <div class="lab-card-header">
+        <div class="lab-card-label">Design Lab</div>
+        <div class="lab-card-title">How to Shape the Room</div>
+      </div>
+      <div class="lab-card-body">
+        <div class="lab-card-text">
+          <p>The <strong>See → Be → Do Model</strong> is a completely different approach to session design — one that shapes sessions that don't just inform, but transform. This is the session where everything clicks. You'll leave able to shape any conversation so that real change happens in the room, not after it.</p>
+          <ul class="lab-checklist">
+            <li><strong>See → Be → Do Model</strong></li>
+            <li>Session design templates</li>
+            <li><strong>From 1hr meetings to 2-day off-sites</strong></li>
+          </ul>
+        </div>
+        <div class="lab-card-right">
+          <div class="lab-img-placeholder">
+            <div class="lab-img-placeholder-icon">◉</div>
+            <div class="lab-img-placeholder-label">Image Placeholder</div>
+          </div>
+          <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="lab-cta">Join Now →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FIELD GUIDE -->
+<section class="field-guide section-light">
+  <div class="field-guide-inner">
+    <div class="field-guide-img-wrap">
+      <img src="field-guide.png" alt="The Lead The Room Field Guide" class="field-guide-img">
+    </div>
+    <div class="field-guide-content">
+      <div class="overline">Your Method, In Your Hands</div>
+      <h2>The Lead The Room <em>Field Guide</em></h2>
+      <p>A professionally designed workbook shipped directly to your door. Not a PDF. Not a slide deck. A physical guide you can return to between sessions, annotate in the room, and keep on your shelf.</p>
+      <p>It contains the complete method, all exercises, session design templates, and the full AI prompt library — everything you need to put the method into practice the moment the programme ends.</p>
+      <div class="field-guide-detail">Included with every Launch Cohort place &nbsp;·&nbsp; Shipped to you</div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDES -->
+<section class="includes section-light">
+  <div class="includes-inner">
+    <div class="overline">Everything Included</div>
+    <h2>The complete programme.</h2>
+    <div class="includes-grid">
+      <div class="include-item">
+        <span class="include-icon">◈</span>
+        <h3>4 Live Facilitation Labs</h3>
+        <p>ConfidenceLab, EnergyLab, StoryLab, DesignLab. Practitioner sessions where you build the skill in real time with a small group of peers who take this craft as seriously as you do.</p>
+      </div>
+      <div class="include-item">
+        <span class="include-icon">▣</span>
+        <h3>Recorded Video Lessons</h3>
+        <p>Deeper sessions on confidence patterns, advanced facilitation tactics, the Four Disciplines of a Skillful Facilitator, preparation systems, and using AI as a facilitation partner.</p>
+      </div>
+      <div class="include-item">
+        <span class="include-icon">◈</span>
+        <h3>The Field Guide</h3>
+        <p>A professionally designed workbook shipped to your door. Contains the complete method, exercises, session design templates, and the full AI prompt library.</p>
+      </div>
+      <div class="include-item">
+        <span class="include-icon">◇</span>
+        <h3>Facilitation Tools &amp; Templates</h3>
+        <p>Practical resources you can use immediately in your next session — not theoretical frameworks, but tools built for real rooms.</p>
+      </div>
+      <div class="include-item">
+        <span class="include-icon">◉</span>
+        <h3>AI Prompt Library</h3>
+        <p>Purpose-built prompts for session design, story development, synthesis, and preparation. Sharpen your message in minutes before any session.</p>
+      </div>
+      <div class="include-item">
+        <span class="include-icon">◈</span>
+        <h3>Community Access</h3>
+        <p>An exclusive community of serious facilitators and group leaders who continue to sharpen their craft together — long after the programme ends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="for-who section-light">
+  <div class="for-who-grid">
+    <div class="for-who-intro">
+      <div class="overline">Who This Is For</div>
+      <h2>Built for <em>practitioners.</em></h2>
+      <p>This programme is designed for experienced facilitators who've never had a structured method to match their level.</p>
+      <ul class="for-who-list">
+        <li>Independent facilitators and trainers who want a structured method to match their experience</li>
+        <li>Consultants who lead strategy sessions and want to elevate their impact</li>
+        <li>Workshop leaders who want to be exceptional at their craft</li>
+        <li>L&amp;D professionals who design and deliver group learning experiences</li>
+        <li>Anyone who's been facilitating for years and has never worked on their craft with peers at their level</li>
+      </ul>
+    </div>
+    <div class="cohort-box">
+      <h3>A practitioner cohort — by design.</h3>
+      <p>When was the last time you were in a room with other people who do what you do — at your level — working on the craft itself?</p>
+      <p>For most facilitators, the answer is never.</p>
+      <p>Each cohort is intentionally limited so that every participant gets real practice, real feedback, and real conversation with peers who understand the work.</p>
+      <p>You'll learn the method by experiencing it — because the sessions themselves model the approach.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials section-light">
+  <div class="testimonials-inner">
+    <div class="testimonials-header">
+      <div class="overline">From the Pilot Cohort</div>
+      <h2>What participants <em>said.</em></h2>
+    </div>
+    <div class="testimonials-grid">
+
+      <!-- VIDEO TESTIMONIAL -->
+      <div class="testimonial-video-wrap">
+        <video controls width="100%" style="display:block;">
+          <source src="testimonial-video-1.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- IMAGE TESTIMONIAL 1 -->
+      <div class="testimonial-image-placeholder">
+        <img src="testimonial-image-1.jpg" alt="Testimonial" style="width:100%;display:block;">
+      </div>
+
+      <!-- IMAGE TESTIMONIAL 2 -->
+      <div class="testimonial-image-placeholder">
+        <img src="testimonial-image-2.jpg" alt="Testimonial" style="width:100%;display:block;">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MENTORS -->
+<section class="mentors section-light">
+  <div class="mentors-inner">
+    <div class="mentors-header">
+      <div class="overline">Your Guides</div>
+      <h2>Meet the <em>Mentors.</em></h2>
+      <p>The Lead The Room method is taught by practitioners who have spent years in the room — shaping the thinking behind it.</p>
+    </div>
+    <div class="mentors-grid">
+
+      <!-- MENTOR 1 -->
+      <div class="mentor-card">
+        <img src="michele-skogerboe.jpg" alt="Michele Skogerboe" class="mentor-img">
+        <div class="mentor-name">Michele Skogerboe</div>
+        <div class="mentor-role">Lead the Room Mentor</div>
+        <p class="mentor-bio">Michele designs and delivers experiences that challenge how leaders think, behave, and show up. She doesn't preach from the front of the room — she creates immersive programs that surface hard truths and help leaders practice courage, curiosity, and care. Her work draws from psychology, systems thinking, and human-centered design — always grounded in evidence but translated for real life.</p>
+      </div>
+
+      <!-- MENTOR 2 -->
+      <div class="mentor-card">
+        <img src="jason-moore.jpg" alt="Jason Moore" class="mentor-img">
+        <div class="mentor-name">Jason Moore</div>
+        <div class="mentor-role">Lead the Room Mentor</div>
+        <p class="mentor-bio">Jason has spent more than two decades facilitating leadership experiences for organisations including Microsoft, HSBC, Netflix, Equinix, Goldman Sachs, and many others — reaching more than 500,000 people across 50+ countries. His style is energising, provocative, and deeply human. He brings both rigour and warmth into the room, and cares as much about what shifts in people as what gets decided.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDING -->
+<section class="founding section-light">
+  <div class="founding-inner">
+    <div class="overline">The Founding Cohort</div>
+    <h2>Only one chance to be <em>first.</em></h2>
+    <p class="founding-intro">As part of our Founding Cohort, you pay only £250 per person for the entire programme. That's a fraction of the standard investment — because we need your help too.</p>
+    <p class="founding-intro">This programme is already great (based on our pilots). But we want it to be exceptional. In exchange for the heavy discount, we want your feedback, your tweaks and commentary. There will only ever be one Founding Cohort.</p>
+    <div class="founding-grid">
+      <div class="founding-detail">
+        <div class="founding-detail-label">Live Labs</div>
+        <div class="founding-detail-value">Four</div>
+      </div>
+      <div class="founding-detail">
+        <div class="founding-detail-label">Session Length</div>
+        <div class="founding-detail-value">90 Minutes</div>
+      </div>
+      <div class="founding-detail">
+        <div class="founding-detail-label">Starts</div>
+        <div class="founding-detail-value">June 9, 2026</div>
+      </div>
+      <div class="founding-detail">
+        <div class="founding-detail-label">Time</div>
+        <div class="founding-detail-value">5:30–7:00 PM UK (Tues & Thur)</div>
+      </div>
+      <div class="founding-detail">
+        <div class="founding-detail-label">Format</div>
+        <div class="founding-detail-value">Live Zoom + On-Demand + Field Guide</div>
+      </div>
+      <div class="founding-detail">
+        <div class="founding-detail-label">Enrollment Closes</div>
+        <div class="founding-detail-value">May 30 at Midnight</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="enroll">
+  <div class="cta-final-inner">
+    <div class="overline">Secure Your Spot</div>
+    <h2>Your instincts got you here.<br>A method takes you <em>further.</em></h2>
+    <p>In a world where AI handles more of the work, the facilitators who thrive will be the ones who can do what technology can't: Lead The Room.</p>
+    <div class="cta-price">
+      <div class="cta-price-amount">£250</div>
+      <div class="cta-price-label">Founding Cohort Price — full programme</div>
+    </div>
+    <br>
+    <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="btn-cta">Secure Your Spot →</a>
+    <div class="cta-deadline">Enrollment closes <strong>May 30 at midnight.</strong> Next cohort will be significantly higher.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">LEAD <span>THE</span> ROOM</div>
+  <div>© 2026 AT OUR BEST LTD. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
