@@ -101,7 +101,7 @@
     .hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
       padding: 6rem 4rem 3.5rem; position: relative; overflow: hidden;
-      border-bottom: 1px solid var(--rule);
+      background: #0c1020;
     }
     .hero::before {
       content: ''; position: absolute; inset: 0;
@@ -144,7 +144,7 @@
     .hero h1 {
       font-size: clamp(3.8rem, 7.5vw, 8rem); font-weight: 900;
       line-height: 0.93; margin-bottom: 2.2rem; max-width: 950px;
-      margin-left: auto; margin-right: auto;
+      margin-left: auto; margin-right: auto; color: #ffffff;
     }
     .hero h1 em { font-style: italic; color: var(--pink); }
 
@@ -198,28 +198,66 @@
 
     /* ── PROBLEM ── */
     .problem {
-      background: var(--bg-2);
-      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+      background: linear-gradient(to bottom, #0c1020 calc(6rem + 180px), #f5f5f5 calc(6rem + 180px));
+      border: none; padding-bottom: 0;
+    }
+    .problem-inner {
+      max-width: 1200px; margin: 0 auto;
+      background: #ffffff; border-radius: 20px 20px 0 0;
+      padding: 3.5rem 4rem 5rem;
+    }
+    .problem-header { text-align: center; margin-bottom: 3.5rem; }
+    .problem-header h2 { text-transform: none; color: #0c1020; }
+    .problem-overline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.8rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 0.4rem; line-height: 1;
     }
     .problem-grid {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
     }
-    .problem-body p { color: var(--white-dim); margin-bottom: 1.2rem; font-size: 1.02rem; }
+    .problem-body p { color: #000000; margin-bottom: 1.2rem; font-size: 1.02rem; }
+    .problem-img {
+      width: 100%; border-radius: 12px; display: block;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
     .problem-quote {
       border-left: 3px solid var(--pink); padding: 1.4rem 1.8rem;
       font-style: italic; font-size: 1.1rem; color: var(--white);
       background: rgba(227,30,84,0.08); margin: 1.8rem 0;
     }
 
-    /* ── METHOD ── */
-    .method { border-bottom: 1px solid var(--rule); }
-    .method-inner { max-width: 1200px; margin: 0 auto; }
+    /* ── METHOD / NOT ── */
+    .method { border: none; background: #f5f5f5 !important; }
+    .method-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; }
 
-    .method-desc {
-      color: var(--white-dim); font-size: 1.05rem;
-      max-width: 640px; margin-bottom: 3rem;
+    .not-box {
+      width: 75%;
+      background: #fef2f5;
+      border-radius: 16px;
+      padding: 3rem 3.5rem;
     }
+    .not-box h2 {
+      text-transform: none;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+    .not-list { list-style: none; }
+    .not-list li {
+      display: flex; align-items: flex-start;
+      gap: 1rem; padding: 0.85rem 0;
+      color: #111111; line-height: 1.6; font-weight: 300;
+      border-bottom: 1px solid rgba(227,30,84,0.1);
+    }
+    .not-list li:last-child { border-bottom: none; }
+    .not-list li::before {
+      content: '✕';
+      color: var(--pink); font-weight: 900;
+      font-size: 1rem; flex-shrink: 0; margin-top: 0.2rem;
+    }
+    @media (max-width: 900px) { .not-box { width: 100%; } }
 
     .method-compare {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -546,7 +584,7 @@
 
       .problem-grid,
       .field-guide-inner,
-      .for-who-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .for-who-grid { grid-template-columns: 1fr; gap: 2rem; }
 
       .method-compare { grid-template-columns: 1fr; }
       .week-item { grid-template-columns: 70px 1fr; gap: 1.5rem; }
@@ -576,7 +614,7 @@
       background: #ffffff;
       color: #0c1020;
     }
-    .section-light.hero::before { background-image: none; }
+    .hero::before { background-image: none; }
 
     /* ── LAB CARDS ── */
     .lab-card {
@@ -649,19 +687,17 @@
       flex-direction: column;
       gap: 1rem;
     }
-    .lab-img-placeholder {
+    .lab-img {
       width: 100%; aspect-ratio: 4 / 3;
-      background: #f0f0f0;
-      border-radius: 10px;
-      border: 1px dashed rgba(0,0,0,0.18);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 0.5rem;
+      object-fit: cover; border-radius: 10px; display: block;
     }
-    .lab-img-placeholder-icon { font-size: 2rem; color: rgba(0,0,0,0.2); }
-    .lab-img-placeholder-label {
-      font-size: 0.68rem; letter-spacing: 0.15em;
-      text-transform: uppercase; color: rgba(0,0,0,0.3);
+
+    .lab-method-divider {
+      text-align: center; margin-bottom: 3rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 4rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--pink);
     }
     .lab-cta {
       display: block; width: 100%;
@@ -676,8 +712,11 @@
     .lab-cta:hover { background: #c41748; transform: translateY(-1px); }
     @media (max-width: 900px) {
       .lab-card-body { grid-template-columns: 1fr; }
-      .lab-card-right { order: -1; }
+      .lab-card-right { order: 1; }
       .lab-card-title { font-size: 1.8rem; }
+    }
+    @media (max-width: 600px) {
+      .lab-cta { display: none; }
     }
 
     .section-light .mentor-img-placeholder,
@@ -698,7 +737,7 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero section-light">
+<section class="hero">
   <div class="hero-glow"></div>
   <div class="hero-glow-2"></div>
   <div class="hero-inner">
@@ -714,26 +753,38 @@
 
 
 <!-- PROBLEM -->
-<section class="problem section-light">
-  <div class="problem-grid">
-    <div>
-      <h2>You don't need another course on how to run a <em>workshop.</em></h2>
+<section class="problem">
+  <div class="problem-inner">
+    <div class="problem-header">
+      <div class="problem-overline">What Is</div>
+      <h2>'Lead the Room — Facilitation Edge'?</h2>
     </div>
-    <div class="problem-body">
-      <p>But here's what even experienced facilitators rarely get:</p>
-      <p>A system.</p>
-      <p>Not a bag of tricks. Not a list of activities. A structured, proven method for leading groups with precision — one that turns the instincts you've built through experience into a repeatable system you can rely on every time.</p>
-      <p>AI can build your agenda, design your slides, and summarise your outputs. But it will never be able to do what you do: walk into a room, read the energy, and move a group of people from stuck to aligned.</p>
-      <p>That human skill is your competitive advantage. And it's about to get a serious upgrade.</p>
+    <div class="problem-grid">
+      <div class="problem-body">
+        <p>But here's what even experienced facilitators rarely get:</p>
+        <p>A system.</p>
+        <p>Not a bag of tricks. Not a list of activities. A structured, proven method for leading groups with precision — one that turns the instincts you've built through experience into a repeatable system you can rely on every time.</p>
+        <p>AI can build your agenda, design your slides, and summarise your outputs. But it will never be able to do what you do: walk into a room, read the energy, and move a group of people from stuck to aligned.</p>
+        <p>That human skill is your competitive advantage. And it's about to get a serious upgrade.</p>
+      </div>
+      <div>
+        <img src="hero-1.jpg" alt="Lead the Room — Facilitation Edge" class="problem-img">
+      </div>
     </div>
   </div>
 </section>
 
-<!-- METHOD -->
+<!-- METHOD / NOT -->
 <section class="method section-light">
   <div class="method-inner">
-    <h2>The Lead The Room <em>Method</em></h2>
-    <p class="method-desc">A structured system for the craft you've been building by feel. It doesn't replace your experience. It organises it — giving you a framework to understand why your best sessions work, and how to make every session that good.</p>
+    <div class="not-box">
+      <h2>Here's What 'Lead the Room — Facilitation Edge' Is <strong><u>NOT</u></strong>:</h2>
+      <ul class="not-list">
+        <li>It's <strong><u>NOT</u></strong> a generic facilitation course full of tips and techniques you've already heard a hundred times before.</li>
+        <li>It's <strong><u>NOT</u></strong> a self-paced video library where you watch alone, hope something sticks, and never actually practise in a real room.</li>
+        <li>And it's <strong><u>NOT</u></strong> built for beginners — this is for experienced facilitators who are ready to turn years of instinct into a structured, repeatable method.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -741,9 +792,11 @@
 <section class="curriculum" id="programme">
   <div class="curriculum-inner">
     <div class="curriculum-header">
-      <h2>How does the 'Lead the Room Facilitation Program' work?</h2>
-      <p>After more than 10,000 hours in the room, we found four things that make a truly great facilitator. First, you build your <strong>CONFIDENCE</strong> — so you can own the room. Then you sharpen your <strong>SKILLS</strong> — so you can influence the room. Next, you become more intentional — so you can read the room. And finally, you master <strong>DESIGN</strong> — so you can shape the room.</p>
+      <h2>How does 'Lead the Room - Facilitation Edge' work?</h2>
+      <p>After more than 30 years facilitating, we found four things that make a truly great facilitator. First, you build your <strong>CONFIDENCE</strong> — so you can own the room. Then you sharpen your <strong>SKILLS</strong> — so you can influence the room. Next, you become more intentional with your <strong>ENERGY</strong> — so you can read and move the room. And finally, you master <strong>DESIGN</strong> — so you can shape the room.</p>
     </div>
+
+    <div class="lab-method-divider">The Lead the Room Method</div>
 
     <!-- LAB 1 -->
     <div class="lab-card">
@@ -762,10 +815,7 @@
           </ul>
         </div>
         <div class="lab-card-right">
-          <div class="lab-img-placeholder">
-            <div class="lab-img-placeholder-icon">◉</div>
-            <div class="lab-img-placeholder-label">Image Placeholder</div>
-          </div>
+          <img src="lab-1.png" alt="Confidence Lab" class="lab-img">
           <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="lab-cta">Join Now →</a>
         </div>
       </div>
@@ -788,10 +838,7 @@
           </ul>
         </div>
         <div class="lab-card-right">
-          <div class="lab-img-placeholder">
-            <div class="lab-img-placeholder-icon">◉</div>
-            <div class="lab-img-placeholder-label">Image Placeholder</div>
-          </div>
+          <img src="lab-2.png" alt="Skills Lab" class="lab-img">
           <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="lab-cta">Join Now →</a>
         </div>
       </div>
@@ -814,10 +861,7 @@
           </ul>
         </div>
         <div class="lab-card-right">
-          <div class="lab-img-placeholder">
-            <div class="lab-img-placeholder-icon">◉</div>
-            <div class="lab-img-placeholder-label">Image Placeholder</div>
-          </div>
+          <img src="lab-3.png" alt="Energy Lab" class="lab-img">
           <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="lab-cta">Join Now →</a>
         </div>
       </div>
@@ -839,10 +883,7 @@
           </ul>
         </div>
         <div class="lab-card-right">
-          <div class="lab-img-placeholder">
-            <div class="lab-img-placeholder-icon">◉</div>
-            <div class="lab-img-placeholder-label">Image Placeholder</div>
-          </div>
+          <img src="lab-4.png" alt="Design Lab" class="lab-img">
           <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="lab-cta">Join Now →</a>
         </div>
       </div>
