@@ -72,7 +72,7 @@
 
     /* ── BUTTONS ── */
     .btn-primary {
-      background: var(--pink); color: var(--white);
+      background: var(--pink); color: #ffffff;
       padding: 0.65rem 1.6rem;
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.95rem; font-weight: 800;
@@ -97,7 +97,7 @@
     /* ── HERO ── */
     .hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-      padding: 9rem 4rem 5rem; position: relative; overflow: hidden;
+      padding: 6rem 4rem 3.5rem; position: relative; overflow: hidden;
       border-bottom: 1px solid var(--rule);
     }
     .hero::before {
@@ -534,7 +534,7 @@
       nav { padding: 1rem 1.5rem; }
       .nav-deadline { display: none; }
       section { padding: 4rem 1.5rem; }
-      .hero { padding: 7rem 1.5rem 4rem; }
+      .hero { padding: 5rem 1.5rem 3rem; }
 
       .stats-bar { grid-template-columns: repeat(2, 1fr); }
       .stat { border-bottom: 1px solid var(--rule); }
@@ -559,6 +559,25 @@
       .includes-grid { grid-template-columns: 1fr; }
       .founding-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── LIGHT SECTIONS ── */
+    .section-light {
+      --white:       #0c1020;
+      --white-dim:   #000000;
+      --white-faint: rgba(26,39,68,0.15);
+      --rule:        rgba(0,0,0,0.1);
+      --bg:          #ffffff;
+      --bg-2:        #f5f5f5;
+      --bg-3:        #ebebeb;
+      background: #ffffff;
+      color: #0c1020;
+    }
+    .section-light.hero::before { background-image: none; }
+
+    .section-light .mentor-img-placeholder,
+    .section-light .testimonial-placeholder {
+      border-color: rgba(0,0,0,0.18);
+    }
   </style>
 </head>
 <body>
@@ -573,78 +592,42 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero section-light">
   <div class="hero-glow"></div>
   <div class="hero-glow-2"></div>
   <div class="hero-inner">
     <div class="hero-badge">Founding Cohort &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Enrollment closes May 30</div>
     <h1>You're already good.<br>This is how you get <em>exceptional.</em></h1>
-    <p class="hero-sub">The Lead The Room Method is a structured, proven system for experienced facilitators — one that turns the instincts you've built over years into something you can rely on every single time.</p>
+    <p class="hero-sub">The Lead The Room Method is a structured, proven system for professional facilitators — one that turns the instincts you've built over years into something you can rely on every single time.</p>
     <div class="hero-actions">
       <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="btn-primary">Secure Your Spot — £250 →</a>
-      <a href="#programme" class="btn-outline">See the Programme</a>
     </div>
-    <p class="hero-note">4 Live Labs &nbsp;·&nbsp; 4 Weeks &nbsp;·&nbsp; <strong>£250 Founding Cohort</strong> &nbsp;·&nbsp; Starts June 2</p>
+    <p class="hero-note">4 Live Labs &nbsp;·&nbsp; <strong>£250 Launch Cohort</strong> &nbsp;·&nbsp; Starts June 9, 2026</p>
   </div>
 </section>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stat">
-    <span class="stat-num">4</span>
-    <span class="stat-label">Live Labs</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">4</span>
-    <span class="stat-label">Weeks</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">90</span>
-    <span class="stat-label">Min per session</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">£250</span>
-    <span class="stat-label">Founding Cohort Price</span>
-  </div>
-</div>
 
 <!-- PROBLEM -->
-<section class="problem">
+<section class="problem section-light">
   <div class="problem-grid">
     <div>
-      <div class="overline">The Problem</div>
-      <h2>Instinct alone has a <em>ceiling.</em> You've probably already hit it.</h2>
+      <h2>You don't need another course on how to run a <em>workshop.</em></h2>
     </div>
     <div class="problem-body">
-      <p>You already know some sessions land better than others. But you can't always explain why. Sometimes the room is electric. Decisions get made. People leave energised.</p>
-      <p>Other times, the same format falls flat. The group is polite but passive. You do the work, but nothing really shifts.</p>
-      <div class="problem-quote">"What was different? Was it the group? Was it me? What did I miss?"</div>
-      <p>You've never had a framework to diagnose this. Because nobody teaches facilitation as a system. You've been building your own — session by session, instinct by instinct. That's what got you here. But instinct alone has a ceiling.</p>
+      <p>But here's what even experienced facilitators rarely get:</p>
+      <p>A system.</p>
+      <p>Not a bag of tricks. Not a list of activities. A structured, proven method for leading groups with precision — one that turns the instincts you've built through experience into a repeatable system you can rely on every time.</p>
+      <p>AI can build your agenda, design your slides, and summarise your outputs. But it will never be able to do what you do: walk into a room, read the energy, and move a group of people from stuck to aligned.</p>
+      <p>That human skill is your competitive advantage. And it's about to get a serious upgrade.</p>
     </div>
   </div>
 </section>
 
 <!-- METHOD -->
-<section class="method">
+<section class="method section-light">
   <div class="method-inner">
-    <div class="overline">Introducing</div>
     <h2>The Lead The Room <em>Method</em></h2>
     <p class="method-desc">A structured system for the craft you've been building by feel. It doesn't replace your experience. It organises it — giving you a framework to understand why your best sessions work, and how to make every session that good.</p>
-
-    <div class="method-compare">
-      <div class="compare-col">
-        <div class="compare-eyebrow">Traditional Facilitation</div>
-        <div class="compare-heading">Managing a process</div>
-        <div class="compare-sub">Keeping things on track. Following the agenda. Managing time.</div>
-      </div>
-      <div class="compare-col active">
-        <div class="compare-eyebrow pink-label">This Method</div>
-        <div class="compare-heading pink">Group Leadership</div>
-        <div class="compare-sub">Moving people — shaping energy, influence, and real outcomes.</div>
-      </div>
-    </div>
-
-    <p class="method-footnote">Most facilitators have never been exposed to this distinction. Once you see it, it changes how you approach every conversation you lead.</p>
   </div>
 </section>
 
@@ -724,7 +707,7 @@
 </section>
 
 <!-- FIELD GUIDE -->
-<section class="field-guide">
+<section class="field-guide section-light">
   <div class="field-guide-inner">
     <div class="field-guide-img-wrap">
       <img src="field-guide.png" alt="The Lead The Room Field Guide" class="field-guide-img">
@@ -734,13 +717,13 @@
       <h2>The Lead The Room <em>Field Guide</em></h2>
       <p>A professionally designed workbook shipped directly to your door. Not a PDF. Not a slide deck. A physical guide you can return to between sessions, annotate in the room, and keep on your shelf.</p>
       <p>It contains the complete method, all exercises, session design templates, and the full AI prompt library — everything you need to put the method into practice the moment the programme ends.</p>
-      <div class="field-guide-detail">Included with every Founding Cohort place &nbsp;·&nbsp; Shipped to you</div>
+      <div class="field-guide-detail">Included with every Launch Cohort place &nbsp;·&nbsp; Shipped to you</div>
     </div>
   </div>
 </section>
 
 <!-- INCLUDES -->
-<section class="includes">
+<section class="includes section-light">
   <div class="includes-inner">
     <div class="overline">Everything Included</div>
     <h2>The complete programme.</h2>
@@ -752,7 +735,7 @@
       </div>
       <div class="include-item">
         <span class="include-icon">▣</span>
-        <h3>On-Demand Masterclasses</h3>
+        <h3>Recorded Video Lessons</h3>
         <p>Deeper sessions on confidence patterns, advanced facilitation tactics, the Four Disciplines of a Skillful Facilitator, preparation systems, and using AI as a facilitation partner.</p>
       </div>
       <div class="include-item">
@@ -780,7 +763,7 @@
 </section>
 
 <!-- FOR WHO -->
-<section class="for-who">
+<section class="for-who section-light">
   <div class="for-who-grid">
     <div class="for-who-intro">
       <div class="overline">Who This Is For</div>
@@ -805,7 +788,7 @@
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials">
+<section class="testimonials section-light">
   <div class="testimonials-inner">
     <div class="testimonials-header">
       <div class="overline">From the Pilot Cohort</div>
@@ -835,7 +818,7 @@
 </section>
 
 <!-- MENTORS -->
-<section class="mentors">
+<section class="mentors section-light">
   <div class="mentors-inner">
     <div class="mentors-header">
       <div class="overline">Your Guides</div>
@@ -865,7 +848,7 @@
 </section>
 
 <!-- FOUNDING -->
-<section class="founding">
+<section class="founding section-light">
   <div class="founding-inner">
     <div class="overline">The Founding Cohort</div>
     <h2>Only one chance to be <em>first.</em></h2>
@@ -873,8 +856,8 @@
     <p class="founding-intro">This programme is already great (based on our pilots). But we want it to be exceptional. In exchange for the heavy discount, we want your feedback, your tweaks and commentary. There will only ever be one Founding Cohort.</p>
     <div class="founding-grid">
       <div class="founding-detail">
-        <div class="founding-detail-label">Duration</div>
-        <div class="founding-detail-value">4 Weeks</div>
+        <div class="founding-detail-label">Live Labs</div>
+        <div class="founding-detail-value">Four</div>
       </div>
       <div class="founding-detail">
         <div class="founding-detail-label">Session Length</div>
@@ -882,11 +865,11 @@
       </div>
       <div class="founding-detail">
         <div class="founding-detail-label">Starts</div>
-        <div class="founding-detail-value">June 2, 2026</div>
+        <div class="founding-detail-value">June 9, 2026</div>
       </div>
       <div class="founding-detail">
         <div class="founding-detail-label">Time</div>
-        <div class="founding-detail-value">5:30–7:00 PM UK</div>
+        <div class="founding-detail-value">5:30–7:00 PM UK (Tues & Thur)</div>
       </div>
       <div class="founding-detail">
         <div class="founding-detail-label">Format</div>
