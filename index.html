@@ -149,7 +149,7 @@
     .hero h1 em { font-style: italic; color: var(--pink); }
 
     .hero-sub {
-      font-size: 1.15rem; color: var(--white-dim);
+      font-size: 2.3rem; color: var(--white-dim);
       max-width: 540px; margin-bottom: 2.8rem; line-height: 1.7;
       margin-left: auto; margin-right: auto;
     }
@@ -207,7 +207,7 @@
       padding: 3.5rem 4rem 5rem;
     }
     .problem-header { text-align: center; margin-bottom: 3.5rem; }
-    .problem-header h2 { text-transform: none; color: #0c1020; }
+    .problem-header h2 { color: #0c1020; font-size: clamp(3rem, 6vw, 6rem); }
     .problem-overline {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 2.8rem; font-weight: 700;
@@ -217,7 +217,7 @@
     .problem-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
     }
-    .problem-body p { color: #000000; margin-bottom: 1.2rem; font-size: 1.02rem; }
+    .problem-body p { color: #000000; margin-bottom: 1.2rem; }
     .problem-img {
       width: 100%; border-radius: 12px; display: block;
       box-shadow: 0 20px 50px rgba(0,0,0,0.15);
@@ -344,7 +344,7 @@
     }
     .field-guide-content h2 { margin-bottom: 1rem; }
     .field-guide-content p {
-      color: var(--white-dim); font-size: 1.02rem;
+      color: var(--white-dim);
       margin-bottom: 1.2rem; max-width: 480px;
     }
     .field-guide-detail {
@@ -501,7 +501,7 @@
       color: var(--pink); margin-bottom: 1.2rem;
     }
     .mentor-bio {
-      color: var(--white-dim); font-size: 0.95rem;
+      color: var(--white-dim);
       line-height: 1.7; max-width: 420px;
     }
 
@@ -624,7 +624,7 @@
       box-shadow: 0 8px 40px rgba(0,0,0,0.55);
     }
     .lab-card-header {
-      background: #131929;
+      background: #1a3a6b;
       padding: 1.6rem 2.5rem;
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
@@ -665,6 +665,7 @@
       padding: 0.5rem 0;
       color: #111111;
       font-size: 1rem;
+      font-weight: 700;
       line-height: 1.4;
       position: static;
       border: none;
@@ -717,6 +718,7 @@
     }
     @media (max-width: 600px) {
       .lab-cta { display: none; }
+      .lab-method-divider { line-height: 1.1; }
     }
 
     .section-light .mentor-img-placeholder,
@@ -729,7 +731,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">LEAD <span>THE</span> ROOM</div>
+  <div class="nav-logo">FACILITATION EDGE</div>
   <div class="nav-right">
     <span class="nav-deadline">Closes <strong>May 30</strong></span>
     <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="btn-primary">Secure Your Spot →</a>
@@ -757,7 +759,7 @@
   <div class="problem-inner">
     <div class="problem-header">
       <div class="problem-overline">What Is</div>
-      <h2>'Lead the Room — Facilitation Edge'?</h2>
+      <h2>'Facilitation Edge'?</h2>
     </div>
     <div class="problem-grid">
       <div class="problem-body">
@@ -778,7 +780,7 @@
 <section class="method section-light">
   <div class="method-inner">
     <div class="not-box">
-      <h2>Here's What 'Lead the Room — Facilitation Edge' Is <strong><u>NOT</u></strong>:</h2>
+      <h2>Here's What 'Facilitation Edge' Is <strong><u>NOT</u></strong>:</h2>
       <ul class="not-list">
         <li>It's <strong><u>NOT</u></strong> a generic facilitation course full of tips and techniques you've already heard a hundred times before.</li>
         <li>It's <strong><u>NOT</u></strong> a self-paced video library where you watch alone, hope something sticks, and never actually practise in a real room.</li>
@@ -792,7 +794,7 @@
 <section class="curriculum" id="programme">
   <div class="curriculum-inner">
     <div class="curriculum-header">
-      <h2>How does 'Lead the Room - Facilitation Edge' work?</h2>
+      <h2>How does the 'Facilitation Edge' program work?</h2>
       <p>After more than 30 years facilitating, we found four things that make a truly great facilitator. First, you build your <strong>CONFIDENCE</strong> — so you can own the room. Then you sharpen your <strong>SKILLS</strong> — so you can influence the room. Next, you become more intentional with your <strong>ENERGY</strong> — so you can read and move the room. And finally, you master <strong>DESIGN</strong> — so you can shape the room.</p>
     </div>
 
@@ -896,7 +898,6 @@
 <section class="mentors section-light">
   <div class="mentors-inner">
     <div class="mentors-header">
-      <div class="overline">Your Guides</div>
       <h2>Meet the <em>Mentors.</em></h2>
       <p>The Lead The Room method is taught by practitioners who have spent years in the room — shaping the thinking behind it.</p>
     </div>
@@ -929,7 +930,6 @@
       <img src="field-guide.png" alt="The Lead The Room Field Guide" class="field-guide-img">
     </div>
     <div class="field-guide-content">
-      <div class="overline">Your Method, In Your Hands</div>
       <h2>The Lead The Room <em>Field Guide</em></h2>
       <p>A professionally designed workbook shipped directly to your door. Not a PDF. Not a slide deck. A physical guide you can return to between sessions, annotate in the room, and keep on your shelf.</p>
       <p>It contains the complete method, all exercises, session design templates, and the full AI prompt library — everything you need to put the method into practice the moment the programme ends.</p>
@@ -943,7 +943,7 @@
   <div class="includes-inner">
     <div class="problem-header" style="margin-bottom:2.5rem;">
       <div class="problem-overline">Here's what you get when you join</div>
-      <h2 style="text-transform:none;">Lead the Room — Facilitation Edge</h2>
+      <h2 style="text-transform:uppercase; font-size: clamp(4.8rem, 9vw, 8rem); color: #0c1020;">THE FACILITATION EDGE PROGRAM</h2>
     </div>
     <div class="includes-grid">
       <div class="include-item">
@@ -984,14 +984,13 @@
 <section class="testimonials section-light">
   <div class="testimonials-inner">
     <div class="testimonials-header">
-      <div class="overline">From the Pilot Cohort</div>
       <h2>What participants <em>said.</em></h2>
     </div>
     <div class="testimonials-grid">
 
       <!-- VIDEO TESTIMONIAL -->
       <div class="testimonial-video-wrap">
-        <video controls width="100%" style="display:block;">
+        <video controls width="100%" style="display:block;" poster="testimonial-poster.jpg">
           <source src="testimonial-video-1.mp4" type="video/mp4">
         </video>
       </div>
@@ -1014,7 +1013,6 @@
 <section class="for-who section-light">
   <div class="for-who-grid">
     <div class="for-who-intro">
-      <div class="overline">Who This Is For</div>
       <h2>Built for <em>practitioners.</em></h2>
       <p>This programme is designed for experienced facilitators who've never had a structured method to match their level.</p>
       <ul class="for-who-list">
@@ -1089,7 +1087,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">LEAD <span>THE</span> ROOM</div>
+  <div class="footer-logo">FACILITATION EDGE</div>
   <div>© 2026 AT OUR BEST LTD. All rights reserved.</div>
 </footer>
 
