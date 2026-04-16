@@ -198,13 +198,23 @@
 
     /* ── PROBLEM ── */
     .problem {
-      background: linear-gradient(to bottom, #0c1020 calc(6rem + 180px), #f5f5f5 calc(6rem + 180px));
-      border: none; padding-bottom: 0;
+      background: #0c1020;
+      border: none; padding-bottom: 6rem;
     }
     .problem-inner {
       max-width: 1200px; margin: 0 auto;
       background: #ffffff; border-radius: 20px 20px 0 0;
       padding: 3.5rem 4rem 5rem;
+    }
+
+    /* NOT CARD — full-width, bottom corners clipped by parent overflow:hidden */
+    .problem-not-card {
+      background: #fef2f5;
+      padding: 3rem 4rem;
+      margin: 0 -4rem;
+    }
+    @media (max-width: 900px) {
+      .problem-not-card { margin: 0 -4rem; padding: 2.5rem 4rem; }
     }
     .problem-header { text-align: center; margin-bottom: 3.5rem; }
     .problem-header h2 { color: #0c1020; font-size: clamp(3rem, 6vw, 6rem); }
@@ -359,19 +369,53 @@
     /* ── INCLUDES ── */
     .includes { border-bottom: 1px solid var(--rule); }
     .includes-inner { max-width: 1200px; margin: 0 auto; }
-    .includes-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+
+    /* 3 side-by-side cards mirroring the lab-card style */
+    .includes-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
       margin-top: 3rem;
     }
-    .include-item { padding: 2.5rem; background: var(--bg); transition: background 0.2s; }
-    .include-item:hover { background: var(--bg-2); }
-    .include-icon { font-size: 1.4rem; color: var(--pink); display: block; margin-bottom: 1rem; }
-    .include-item h3 {
-      font-size: 1.05rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.05em; margin-bottom: 0.7rem;
+    .include-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.22);
+      display: flex;
+      flex-direction: column;
     }
-    .include-item p { font-size: 0.9rem; color: var(--white-dim); line-height: 1.6; }
+    .include-card-header {
+      background: #1a3a6b;
+      padding: 1.2rem 1.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .include-card-label {
+      color: var(--pink);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 400;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .include-card-title {
+      color: #ffffff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.6rem; font-weight: 900; text-transform: uppercase;
+      line-height: 1; margin: 0; letter-spacing: 0.05em;
+    }
+    .include-card-body {
+      background: #ffffff;
+      padding: 1.6rem 1.8rem;
+      flex: 1;
+    }
+    .include-card-body p {
+      color: #000000;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    @media (max-width: 900px) {
+      .includes-cards { grid-template-columns: 1fr; }
+    }
 
     /* ── FOR WHO ── */
     .for-who {
@@ -385,11 +429,25 @@
     .for-who-intro p { color: var(--white-dim); margin-bottom: 2rem; }
     .for-who-list { list-style: none; }
     .for-who-list li {
-      padding: 0.85rem 0 0.85rem 1.4rem;
+      display: flex; align-items: flex-start;
+      gap: 0.8rem; padding: 0.85rem 0;
       border-bottom: 1px solid var(--rule);
-      color: var(--white-dim); font-size: 0.95rem; position: relative;
+      color: var(--white-dim); font-size: 0.95rem;
     }
-    .for-who-list li::before { content: '→'; position: absolute; left: 0; color: var(--pink); }
+    .for-who-list li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 22px; height: 22px; min-width: 22px;
+      background: rgba(227,30,84,0.1);
+      border: 1.5px solid var(--pink);
+      border-radius: 4px;
+      color: var(--pink);
+      font-size: 0.75rem; font-weight: 900;
+      line-height: 20px; text-align: center;
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      margin-top: 0.15rem;
+    }
 
     .cohort-box {
       background: var(--bg); border: 1px solid var(--rule);
@@ -397,6 +455,28 @@
     }
     .cohort-box h3 { font-size: 1.55rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1.5rem; }
     .cohort-box p { color: var(--white-dim); font-size: 0.95rem; margin-bottom: 1rem; }
+
+    /* Cohort checklist — matches the ✓ style from the lab cards */
+    .cohort-list { list-style: none; margin: 0.5rem 0 1.2rem; }
+    .cohort-list li {
+      display: flex; align-items: flex-start;
+      gap: 0.8rem; padding: 0.5rem 0;
+      color: var(--white-dim); font-size: 0.95rem; line-height: 1.5;
+    }
+    .cohort-list li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 22px; height: 22px; min-width: 22px;
+      background: rgba(227,30,84,0.1);
+      border: 1.5px solid var(--pink);
+      border-radius: 4px;
+      color: var(--pink);
+      font-size: 0.75rem; font-weight: 900;
+      line-height: 20px; text-align: center;
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      margin-top: 0.15rem;
+    }
 
     /* ── TESTIMONIALS ── */
     .testimonials {
@@ -750,30 +830,30 @@
       <div class="problem-overline">What Is</div>
       <h2>Facilitation Edge?</h2>
     </div>
-    <p style="color:#000000; font-weight:700; margin-bottom:2.5rem; line-height:1.7;">Most experienced facilitators have built their instincts through years of practice. They can read a room, manage tension, and get groups to move. What they rarely have is a system.</p>
+    <p style="color:#000000; font-weight:700; margin-bottom:2.5rem; line-height:1.7;">Most experienced facilitators have built their instincts through years of practice. They can manage a room, work through tension, and get groups to move. What they rarely have is a system.</p>
     <div class="problem-grid">
       <div class="problem-body">
-        <p>A structured, proven method for leading groups with precision — one that turns hard-won instincts into something you can rely on every single time.</p>
-        <p>AI can build your agenda, design your slides, and summarise your outputs. But it won't be able to do what you do: walk into a room, read the energy, and move a group of people from stuck to aligned.</p>
+        <p>Facilitation Edge is structured, proven system for leading groups with precision — one that turns hard-won instincts into something you can rely on every single time.</p>
+        <p>You can use AI to build an agenda, design  slides, and summarise  outputs. But it won't be able to do what you do: walk into a room, read the energy, and move a group of people from stuck to aligned.</p>
         <p>That human skill is your competitive advantage. Facilitation Edge gives it a structure.</p>
       </div>
       <div>
         <img src="hero-1.jpg" alt="Lead the Room — Facilitation Edge" class="problem-img">
       </div>
     </div>
-    <p style="color:#000000; margin-top:2.5rem; line-height:1.7;"><strong>In other words:</strong> Facilitation Edge is a structured, practitioner-led method for experienced facilitators — built by two people who've spent decades in the room. Not a course about facilitation. A system for doing it better.</p>
-
+    <p style="color:#000000; font-weight:700; margin-top:2.5rem; line-height:1.7; margin-bottom:0;"><strong>In other words:</strong> Facilitation Edge is a structured, practitioner-led method for experienced facilitators — built by two people who've spent decades in the room. A system for doing it better.</p>
     <!-- HERO CTA BLOCK (inside card) -->
     <div style="text-align:center; padding: 4rem 2rem 3rem; border-top: 1px solid rgba(0,0,0,0.07); margin-top: 3rem;">
-      <h1 style="font-family:'Barlow Condensed',sans-serif; font-size:clamp(3.2rem,6.5vw,7rem); font-weight:900; line-height:0.93; color:#0c1020; margin-bottom:2rem; text-transform:uppercase; letter-spacing:-0.01em;">You're already good.<br>This is how you get <em style="font-style:italic; color:#e31e54;">exceptional.</em></h1>
-      <div style="display:flex; justify-content:center; margin-bottom:1.5rem;">
+      <h1 style="font-family:'Barlow Condensed',sans-serif; font-size:clamp(3.2rem,6.5vw,7rem); font-weight:900; line-height:0.93; color:#0c1020; margin-bottom:2rem; text-transform:uppercase; letter-spacing:-0.01em;">&nbsp;NOT A HOW TO FACILITATE COURSE</h1>
+<h1 style="font-family:'Barlow Condensed',sans-serif; font-size:clamp(3.2rem,6.5vw,7rem); font-weight:900; line-height:0.93; color:#0c1020; margin-bottom:2rem; text-transform:uppercase; letter-spacing:-0.01em;">A SYSTEm To <em style="font-style:italic; color:#e31e54;">FACILITATE BETTER.</em></h1>
+<div style="display:flex; justify-content:center; margin-bottom:1.5rem;">
         <a href="https://buy.stripe.com/dRm00lcxPf6AfSaa5p1ck00" class="btn-primary">Secure Your Spot — £250 →</a>
       </div>
       <p style="font-size:0.76rem; color:#666; letter-spacing:0.04em;">4 Live Labs (90 mins each) &nbsp;·&nbsp; <strong style="color:#0c1020;">£250 Launch Cohort — 50% off, full price £500 from June 1</strong> &nbsp;·&nbsp; Starts June 8, 2026</p>
     </div>
 
-    <!-- NOT BOX (bottom of card, rounded bottom corners) -->
-    <div style="background:#fef2f5; padding:3rem 3.5rem;">
+    <!-- NOT BOX (full-width, rounded bottom corners clipped by parent overflow:hidden) -->
+    <div class="problem-not-card">
       <h2 style="font-family:'Barlow Condensed',sans-serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800; text-transform:none; line-height:1.2; margin-bottom:2rem; color:#0c1020; letter-spacing:-0.01em;">Here's What Facilitation Edge Is <strong><u>NOT</u></strong>:</h2>
       <ul class="not-list">
         <li>It's <strong><u>NOT</u></strong> a generic facilitation course full of tips and techniques you've already heard a hundred times before.</li>
@@ -845,12 +925,12 @@
       </div>
       <div class="lab-card-body">
         <div class="lab-card-text">
-          <p>The <strong>Core Message Method</strong> gives you a structured way to distil complex ideas into something a room full of people will remember, repeat, and act on. Paired with a practical storytelling structure, this session equips you to shape decisions — even in rooms full of competing agendas.</p>
+          <p>&nbsp;This session maps the <strong>Four Disciplines of a Skilful Facilitator</strong>, gives you a system to elevate each one, then goes deep on the hardest to get right — using the Core Message Method and a practical storytelling structure to shape decisions, even in rooms full of competing agendas.</p>
           <ul class="lab-checklist">
+            <li><strong>4 Disciplines of Facilitation</strong></li>
+            <li>The Simple&nbsp; Story Structure</li>
             <li><strong>The Three Pillars Rule</strong></li>
-            <li>The Simple BME Story Structure</li>
-            <li><strong>The Playback Technique</strong></li>
-            <li>AI Prompts for message clarity</li>
+            <li>The Core Message Method</li>
           </ul>
         </div>
         <div class="lab-card-right">
@@ -868,12 +948,12 @@
       </div>
       <div class="lab-card-body">
         <div class="lab-card-text">
-          <p>The <strong>Group Leadership Energy Map</strong> gives you a simple, reliable way to read the energy of any group. You'll also learn how to widen your own energy range so you can match, mirror, and move any group — not just observe it.</p>
+          <p>The <strong>Group Leadership Energy Map™</strong> gives you a simple, reliable way to read the energy of any group. You'll also learn how to widen your own energy range so you can match, mirror, and move any group — not just observe it.</p>
           <ul class="lab-checklist">
-            <li><strong>The Pattern Break</strong></li>
-            <li>The Intentional Check-In</li>
-            <li><strong>The Four Moves Framework</strong></li>
-            <li>The Non-Negotiables Rule</li>
+            <li><strong>A language to help you instantly read a room</strong></li>
+            <li>Learn how and when to match or mirror energy&nbsp; &nbsp;</li>
+            <li><strong>A framework for moving any room's energy&nbsp;</strong></li>
+            <li>The 4 Energy Shifting Tactics</li>
           </ul>
         </div>
         <div class="lab-card-right">
@@ -895,7 +975,7 @@
           <ul class="lab-checklist">
             <li><strong>See → Be → Do Model</strong></li>
             <li>Session design templates</li>
-            <li><strong>From 1hr meetings to 2-day off-sites</strong></li>
+            <li><strong>A complete system for design&nbsp; &nbsp;&nbsp;</strong></li>
           </ul>
         </div>
         <div class="lab-card-right">
@@ -960,36 +1040,33 @@
       <div class="problem-overline">Here's what you get when you join</div>
       <h2 style="text-transform:uppercase; font-size: clamp(2.4rem, 4.5vw, 4rem); color: #0c1020;">THE FACILITATION EDGE PROGRAM</h2>
     </div>
-    <div class="includes-grid">
-      <div class="include-item">
-        <span class="include-icon">◈</span>
-        <h3>4 Live Facilitation Labs</h3>
-        <p>Four 90-minute live sessions via Zoom — Confidence, Skills, Energy, and Design. Small cohort by design, so you practise in real time with peers who take this craft as seriously as you do.</p>
+    <div class="includes-cards">
+      <div class="include-card">
+        <div class="include-card-header">
+          <div class="include-card-label">Facilitation Labs</div>
+          <div class="include-card-title">4 Live Sessions</div>
+        </div>
+        <div class="include-card-body">
+          <p>Four 90-minute live sessions via Zoom — Confidence, Skills, Energy, and Design. Small cohort by design, so you practise in real time with peers who take this craft as seriously as you do.</p>
+        </div>
       </div>
-      <div class="include-item">
-        <span class="include-icon">▣</span>
-        <h3>Lead the Room Method Video Library</h3>
-        <p>On-demand video sessions covering confidence patterns, advanced facilitation tactics, the Four Disciplines of a Skilful Facilitator, preparation systems, and using AI as a facilitation partner. Yours to keep and revisit after the programme ends.</p>
+      <div class="include-card">
+        <div class="include-card-header">
+          <div class="include-card-label">Video Library</div>
+          <div class="include-card-title">Lead the Room Method</div>
+        </div>
+        <div class="include-card-body">
+          <p>On-demand video sessions covering confidence patterns, advanced facilitation tactics, the Four Disciplines of a Skilful Facilitator, preparation systems, and using AI as a facilitation partner. Yours to keep and revisit after the programme ends.</p>
+        </div>
       </div>
-      <div class="include-item">
-        <span class="include-icon">◈</span>
-        <h3>The Field Guide</h3>
-        <p>A professionally designed workbook shipped to your door. Contains the complete method, exercises, session design templates, and the full AI prompt library.</p>
-      </div>
-      <div class="include-item">
-        <span class="include-icon">◇</span>
-        <h3>Facilitation Tools &amp; Templates</h3>
-        <p>Practical resources you can use immediately in your next session — not theoretical frameworks, but tools built for real rooms.</p>
-      </div>
-      <div class="include-item">
-        <span class="include-icon">◉</span>
-        <h3>AI Prompt Library</h3>
-        <p>Purpose-built prompts for session design, story development, synthesis, and preparation. Sharpen your message in minutes before any session.</p>
-      </div>
-      <div class="include-item">
-        <span class="include-icon">◈</span>
-        <h3>Community Access</h3>
-        <p>An ongoing community of serious facilitators and group leaders who continue to sharpen their craft together — long after the programme ends.</p>
+      <div class="include-card">
+        <div class="include-card-header">
+          <div class="include-card-label">Physical Workbook</div>
+          <div class="include-card-title">The Field Guide</div>
+        </div>
+        <div class="include-card-body">
+          <p>A professionally designed workbook shipped to your door. Contains the complete method, exercises, session design templates, and the full AI prompt library.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1029,7 +1106,7 @@
   <div class="for-who-grid">
     <div class="for-who-intro">
       <h2>Built for <em>practitioners.</em></h2>
-      <p>This programme is designed for experienced facilitators who've never had a structured method to match their level.</p>
+      <p>This programme is designed for professional facilitator, including:</p>
       <ul class="for-who-list">
         <li>Independent facilitators and trainers who want a structured method to match their experience</li>
         <li>Consultants who lead strategy sessions and want to elevate their impact</li>
@@ -1040,46 +1117,17 @@
     </div>
     <div class="cohort-box">
       <h3>A practitioner cohort — by design.</h3>
-      <p>When was the last time you were in a room with other people who do what you do — at your level — working on the craft itself?</p>
-      <p>For most facilitators, the answer is never.</p>
-      <p>Each cohort is intentionally limited so that every participant gets real practice, real feedback, and real conversation with peers who understand the work.</p>
-      <p>You'll learn the method by experiencing it — because the sessions themselves model the approach.</p>
-    </div>
-  </div>
-</section>
-
-<!-- LAUNCH COHORT -->
-<section class="founding section-light">
-  <div class="founding-inner">
-    <div class="overline">The Launch Cohort</div>
-    <h2>Only one chance to be <em>first.</em></h2>
-    <p class="founding-intro">As part of the Launch Cohort, you join at £250 per person — 50% off the full programme price of £500. This discount is only available until May 30.</p>
-    <p class="founding-intro">Here's exactly what that gets you: four live 90-minute Zoom sessions (Tuesday and Thursday evenings, 5:30–7:00pm UK), plus the Lead the Room Method Video Library that is yours to keep, a physical Field Guide shipped to your door, and ongoing community access. The programme runs across two weeks in June, starting the 8th.</p>
-    <div class="founding-grid">
-      <div class="founding-detail">
-        <div class="founding-detail-label">Live Labs</div>
-        <div class="founding-detail-value">Four × 90 Minutes</div>
-      </div>
-      <div class="founding-detail">
-        <div class="founding-detail-label">Format</div>
-        <div class="founding-detail-value">Live Zoom + Lead the Room Method Video Library + Physical Field Guide</div>
-      </div>
-      <div class="founding-detail">
-        <div class="founding-detail-label">Starts</div>
-        <div class="founding-detail-value">June 8, 2026</div>
-      </div>
-      <div class="founding-detail">
-        <div class="founding-detail-label">Session Times</div>
-        <div class="founding-detail-value">5:30–7:00 PM UK (Tues & Thur)</div>
-      </div>
-      <div class="founding-detail">
-        <div class="founding-detail-label">Launch Cohort Price</div>
-        <div class="founding-detail-value">£250 — 50% off (full price £500)</div>
-      </div>
-      <div class="founding-detail">
-        <div class="founding-detail-label">50% Discount Closes</div>
-        <div class="founding-detail-value">May 30 at Midnight</div>
-      </div>
+      <p>As part of the Founding Cohort, you pay £250 per person for the complete programme.</p>
+      <p>That's a <strong>50% discount on the standard investment</strong> — because we want your feedback as we refine it.</p>
+      <p>Here's exactly what that gets you:</p>
+      <ul class="cohort-list">
+        <li>4 x live 90-minute Zoom sessions (Tuesday and Thursday evenings, 5:30–7:00pm UK)</li>
+        <li>On-demand video lessons that are yours to keep</li>
+        <li>A physical Field Guide shipped to your door</li>
+      </ul>
+      <p>Each cohort is intentionally limited so every participant gets to participate in real conversation with peers who understand the work.</p>
+      <p>The programme runs across two weeks in June, <strong>starting the 9th</strong>.&nbsp;</p>
+      <p>There will only ever be one Launch Cohort.</p>
     </div>
   </div>
 </section>
@@ -1087,10 +1135,10 @@
 <!-- CTA FINAL -->
 <section class="cta-final" id="enroll">
   <div class="cta-final-inner">
-    <div class="overline">Secure Your Spot</div>
-    <h2>Your instincts got you here.<br>A method takes you <em>further.</em></h2>
-    <p>In a world where AI handles more of the work, the facilitators who thrive will be the ones who can do what technology can't: Lead The Room.</p>
+    <h2>Your instincts got you here.<br>
+     A SYSTEM takes you <em>further.</em></h2>
     <div class="cta-price">
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:2rem; font-weight:700; color:rgba(255,255,255,0.6); text-decoration:line-through; line-height:1; margin-bottom:0.4rem;">£500</div>
       <div class="cta-price-amount">£250</div>
       <div class="cta-price-label">Launch Cohort Price — 50% off. Full price £500 from June 1. Everything included.</div>
     </div>
