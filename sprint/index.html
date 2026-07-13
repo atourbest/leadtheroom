@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placeholder Headline — Landing Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e1029;              /* deep navy page background */
+    --bg-soft: #12142f;
+    --card: #23264a;            /* raised navy card */
+    --card-soft: #1d2040;
+    --line: rgba(255,255,255,.08);
+    --text: #ffffff;
+    --muted: #9aa1c2;           /* lavender-gray body copy */
+    --accent: #ed2e5c;          /* crimson/pink accent */
+    --accent-soft: #ff5b7f;
+    --orange: #f89c2e;
+    --grad: linear-gradient(90deg, #e02f75 0%, #f05a3c 55%, #f9a03b 100%);
+    --grad-vert: linear-gradient(160deg, #e02f75 0%, #f9a03b 100%);
+    --radius: 20px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding-bottom: 110px; /* room for sticky CTA */
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 90px 0; }
+
+  /* ---------- shared type ---------- */
+  .eyebrow {
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  h1, h2 {
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1.12;
+  }
+  h1 { font-size: clamp(40px, 7vw, 64px); }
+  h2 { font-size: clamp(30px, 5vw, 44px); }
+  .lead { color: var(--muted); font-size: 19px; margin-top: 22px; }
+  .center { text-align: center; }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-block;
+    background: var(--grad);
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 18px 48px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 0 40px rgba(224, 47, 117, .35);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 0 55px rgba(224, 47, 117, .5); }
+
+  /* ---------- hero ---------- */
+  .hero { padding-top: 110px; text-align: center; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 36px;
+  }
+  .badge .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+  }
+  .underline-swash { position: relative; white-space: nowrap; }
+  .underline-swash svg {
+    position: absolute; left: 0; bottom: -12px; width: 100%; height: 14px;
+  }
+  .hero .btn { margin-top: 38px; }
+  .stars { color: var(--orange); font-size: 22px; letter-spacing: 4px; margin-top: 30px; }
+  .social-proof { font-weight: 700; margin-top: 10px; }
+  .avatar-row { display: flex; justify-content: center; gap: 4px; margin-top: 16px; }
+  .avatar-row .avatar {
+    width: 54px; height: 54px; border-radius: 8px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 11px; font-weight: 600;
+  }
+  .countdown-label {
+    margin-top: 56px;
+    color: var(--muted);
+    font-size: 13px; font-weight: 700;
+    letter-spacing: .25em; text-transform: uppercase;
+  }
+  .countdown { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
+  .count-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    width: 84px; padding: 18px 0 14px;
+  }
+  .count-box .num { font-size: 32px; font-weight: 800; }
+  .count-box .unit {
+    display: block; margin-top: 6px;
+    color: var(--muted); font-size: 11px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+  }
+
+  /* ---------- numbered opportunity cards ---------- */
+  .num-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 44px 36px;
+    margin-top: 28px;
+  }
+  .num-card .big-num {
+    font-size: 56px; font-weight: 800;
+    background: linear-gradient(120deg, #ed2e5c, #c9184a);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .num-card h3 { font-size: 26px; font-weight: 800; margin: 18px 0 14px; }
+  .num-card p { color: var(--muted); font-size: 18px; }
+
+  /* ---------- quiz cards ---------- */
+  .quiz-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 40px 36px;
+    margin-top: 28px;
+  }
+  .check-circle {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(46, 204, 113, .15);
+    color: #2ecc71;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 26px;
+  }
+  .quiz-card h3 { font-size: 24px; font-weight: 800; line-height: 1.35; }
+  .quiz-card h3 .hl { color: var(--accent); }
+  .quiz-card p { color: var(--muted); font-size: 18px; margin-top: 16px; }
+  .quiz-card p strong { color: #cdd2e9; }
+
+  /* ---------- timeline / sessions ---------- */
+  .schedule-note { color: var(--muted); font-size: 17px; margin-top: 18px; }
+  .timeline { margin-top: 70px; position: relative; padding-left: 44px; }
+  .timeline::before {
+    content: "";
+    position: absolute; left: 14px; top: 30px; bottom: 30px;
+    width: 2px;
+    background: linear-gradient(180deg, #e02f75, rgba(224,47,117,.25));
+  }
+  .session { position: relative; padding-bottom: 80px; }
+  .session:last-child { padding-bottom: 0; }
+  .session .marker {
+    position: absolute; left: -44px; top: -6px;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--grad-vert);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800;
+    box-shadow: 0 0 25px rgba(240, 90, 60, .4);
+  }
+  .date-pill {
+    display: inline-block;
+    background: var(--card);
+    border-radius: 10px;
+    padding: 8px 18px;
+    color: var(--accent);
+    font-size: 13px; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase;
+    margin-left: 36px;
+  }
+  .session h3 { font-size: 30px; font-weight: 800; margin: 22px 0 16px; }
+  .session p { color: var(--muted); font-size: 18px; }
+  .prompt-chip {
+    display: inline-block;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 22px;
+    margin-top: 24px;
+  }
+  .prompt-chip .chip-label {
+    display: block;
+    color: var(--accent);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .prompt-chip .chip-title { display: block; font-weight: 700; font-size: 16px; line-height: 1.9; }
+
+  /* ---------- testimonials ---------- */
+  .t-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 40px 36px;
+    margin-top: 28px;
+  }
+  .t-card blockquote { color: var(--muted); font-size: 19px; }
+  .t-card .person { display: flex; align-items: center; gap: 16px; margin-top: 30px; }
+  .t-card .p-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--grad-vert);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px;
+  }
+  .t-card .p-name { font-weight: 700; font-size: 18px; }
+
+  /* ---------- everything you get ---------- */
+  .get-intro { color: var(--muted); font-size: 17px; }
+  .get-list { list-style: none; margin-top: 44px; }
+  .get-list li {
+    position: relative;
+    padding-left: 52px;
+    margin-bottom: 34px;
+    color: var(--muted); font-size: 18px;
+  }
+  .get-list li strong { color: var(--text); }
+  .get-list li .icon {
+    position: absolute; left: 0; top: 2px;
+    font-size: 22px; color: #cdd2e9;
+  }
+  .get-list li.bonus .icon { color: var(--accent-soft); }
+
+  /* ---------- value stack ---------- */
+  .stack-card {
+    background: var(--card);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 24px 36px 36px;
+    margin-top: 48px;
+  }
+  .stack-row {
+    display: flex; justify-content: space-between; gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 18px;
+  }
+  .stack-row .val { color: var(--muted); white-space: nowrap; }
+  .stack-total {
+    display: flex; justify-content: space-between;
+    padding-top: 28px;
+    font-size: 24px; font-weight: 800;
+  }
+  .stack-total .val { text-decoration: line-through; text-decoration-color: var(--accent); }
+  .price-banner {
+    background: var(--grad);
+    border-radius: 0 0 var(--radius) var(--radius);
+    text-align: center;
+    padding: 44px 36px 50px;
+  }
+  .price-banner .label {
+    font-size: 13px; font-weight: 700;
+    letter-spacing: .28em; text-transform: uppercase;
+    opacity: .9;
+  }
+  .price-banner .price { font-size: 72px; font-weight: 900; margin-top: 8px; }
+  .price-banner .was {
+    font-size: 34px; font-weight: 700;
+    opacity: .65; text-decoration: line-through;
+    margin-right: 16px;
+  }
+  .stack-cta { text-align: center; margin-top: 44px; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list {
+    background: var(--card-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-top: 48px;
+    overflow: hidden;
+  }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-item summary {
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    padding: 30px 32px;
+    font-size: 20px; font-weight: 600;
+    cursor: pointer;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary .plus {
+    color: var(--accent);
+    font-size: 26px; font-weight: 700;
+    transition: transform .2s ease;
+    flex-shrink: 0;
+  }
+  .faq-item[open] summary { color: var(--accent); }
+  .faq-item[open] summary .plus { transform: rotate(45deg); }
+  .faq-item .answer { padding: 0 32px 30px; color: var(--muted); font-size: 17px; }
+
+  /* ---------- placeholder media block ---------- */
+  .media-placeholder {
+    background: var(--card);
+    border: 1px dashed rgba(255,255,255,.2);
+    border-radius: var(--radius);
+    aspect-ratio: 16/9;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-weight: 600;
+    margin-top: 48px;
+  }
+
+  /* ---------- sticky CTA ---------- */
+  .sticky-cta {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    padding: 16px 24px 22px;
+    background: linear-gradient(180deg, rgba(14,16,41,0) 0%, rgba(14,16,41,.92) 35%);
+    text-align: center;
+    z-index: 50;
+  }
+  .sticky-cta .btn { padding: 16px 56px; }
+
+  /* ---------- footer ---------- */
+  footer { text-align: center; padding: 40px 0 60px; color: var(--muted); font-size: 15px; }
+
+  @media (max-width: 600px) {
+    section { padding: 64px 0; }
+    .count-box { width: 72px; }
+    .date-pill { margin-left: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 1. HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="badge"><span class="dot"></span> Live Sprint Begins Tuesday, September 15, 2026</div>
+    <h1>Lead Any Room<br>In <span class="underline-swash">2 Weeks<svg viewBox="0 0 200 14" preserveAspectRatio="none"><path d="M4 10 Q 100 -2 196 8" stroke="#ed2e5c" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span></h1>
+    <p class="lead">Join us for four live labs to build real confidence, sharpen vital influence skills, and learn to read any room and move it toward the outcome you need.</p>
+    <a class="btn" href="https://pfnl.co/8m8y1ah">Join the Sprint</a>
+    <div class="stars">★★★★★</div>
+    <p class="social-proof">Join a growing cohort of ambitious leaders!</p>
+    <div class="avatar-row">
+      <div class="avatar">IMG</div><div class="avatar">IMG</div><div class="avatar">IMG</div><div class="avatar">IMG</div>
+    </div>
+    <p class="countdown-label">Cart Closes In</p>
+    <div class="countdown">
+      <div class="count-box"><span class="num" id="cd-days">00</span><span class="unit">Days</span></div>
+      <div class="count-box"><span class="num" id="cd-hrs">00</span><span class="unit">Hrs</span></div>
+      <div class="count-box"><span class="num" id="cd-min">00</span><span class="unit">Min</span></div>
+      <div class="count-box"><span class="num" id="cd-sec">00</span><span class="unit">Sec</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. THE OPPORTUNITY ============ -->
+<section>
+  <div class="container">
+    <p class="eyebrow">The Opportunity</p>
+    <h2>Why learn to lead the room in 2026?</h2>
+
+    <div class="num-card">
+      <div class="big-num">01</div>
+      <h3>Influence Without Authority</h3>
+      <p>Leadership no longer comes with a reporting line. The real work happens across teams &mdash; aligning peers, stakeholders, and seniors you can't instruct &mdash; and the room is where that work gets done.</p>
+    </div>
+    <div class="num-card">
+      <div class="big-num">02</div>
+      <h3>Presence That Gets Noticed</h3>
+      <p>The room is where reputations are made. Lead a meeting, town hall, or off-site well and the right people see a leader &mdash; not the person who holds the agenda.</p>
+    </div>
+    <div class="num-card">
+      <div class="big-num">03</div>
+      <h3>Outcomes You Can Point To</h3>
+      <p>Most meetings end in more meetings. When you reliably end in decisions, alignment, and momentum, you become the person trusted with the moments that matter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. WHAT IS IT ============ -->
+<section class="center">
+  <div class="container">
+    <p class="eyebrow">The Program</p>
+    <h2>How does the Lead the Room sprint work?</h2>
+    <p class="lead">Thirty years of leading rooms taught us it comes down to four things. You build CONFIDENCE to own the room, sharpen SKILLS to influence it, master ENERGY to read and move it, and use DESIGN to shape it &mdash; one lab per skill, two weeks, every session practised live.</p>
+    <div class="media-placeholder">[ Placeholder image / video ]</div>
+  </div>
+</section>
+
+<!-- ============ 4. QUIZ ============ -->
+<section>
+  <div class="container">
+    <h2 class="center">Quiz: Is this right for you?</h2>
+
+    <div class="quiz-card">
+      <div class="check-circle">✓</div>
+      <h3>Do you need to <span class="hl">influence and align people</span> who don't report to you?</h3>
+      <p>Are you leading through persuasion, not position &mdash; and finding that <strong>good arguments alone don't move the room</strong>?</p>
+    </div>
+    <div class="quiz-card">
+      <div class="check-circle">✓</div>
+      <h3>Do you run <span class="hl">high-stakes meetings, town halls, or off-sites</span> &mdash; but walk out without the result you needed?</h3>
+      <p>Are you pouring hours into preparing the content, yet the room still <strong>drifts, stalls, or ends with no clear decision</strong>?</p>
+    </div>
+    <div class="quiz-card">
+      <div class="check-circle">✓</div>
+      <h3>Are you <span class="hl">technically excellent</span>, but want to lead rooms with more confidence and precision?</h3>
+      <p>Does your expertise speak for itself on paper, yet in the room you <strong>hold back, over-explain, or lose the group</strong>?</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. THE SESSIONS ============ -->
+<section>
+  <div class="container">
+    <div class="center">
+      <p class="eyebrow">The 4 Live Sessions</p>
+      <h2>Here's what you'll build.</h2>
+      <p class="schedule-note">All sessions 90 min · Tuesdays and Thursdays · 5:00 PM BST | 9:00 AM PST · Sept 15 – Sept 24, 2026</p>
+    </div>
+
+    <div class="timeline">
+      <div class="session">
+        <div class="marker">1</div>
+        <span class="date-pill">Tue Sept 15</span>
+        <h3>Own the room with Confidence</h3>
+        <p>Confidence isn't a trait &mdash; it's a practice. Learn the Four P's of Confidence and leave with a repeatable loop for walking into any room ready to lead.</p>
+        <div class="prompt-chip"><span class="chip-label">Resources Included</span><span class="chip-title">The Permission Principle</span><span class="chip-title">The Positive Expectancy Habit</span><span class="chip-title">Five Presence Levers</span><span class="chip-title">The Practice Loop</span></div>
+      </div>
+      <div class="session">
+        <div class="marker">2</div>
+        <span class="date-pill">Thur Sept 17</span>
+        <h3>Influence the room with Skills</h3>
+        <p>Master the core skills that influence any room: nailing your central message, sharing knowledge powerfully, asking the right questions, and telling stories that land &mdash; then use them in your very next meeting.</p>
+        <div class="prompt-chip"><span class="chip-label">Resources Included</span><span class="chip-title">4 Disciplines of Skilful Facilitation</span><span class="chip-title">The Core Message Method</span><span class="chip-title">The Simple 3-Step Story Structure</span></div>
+      </div>
+      <div class="session">
+        <div class="marker">3</div>
+        <span class="date-pill">Tue Sept 22</span>
+        <h3>Read and move the room's Energy</h3>
+        <p>Unmask the mystery of 'reading the room.' Learn to map a group's energy in real time &mdash; and the practical moves that shift a room when it's stuck, flat, or off-track.</p>
+        <div class="prompt-chip"><span class="chip-label">Resources Included</span><span class="chip-title">Group Dynamics Energy Map</span><span class="chip-title">4 Surefire Energy Tactics</span></div>
+      </div>
+      <div class="session">
+        <div class="marker">4</div>
+        <span class="date-pill">Thur Sept 24</span>
+        <h3>Shape the room with Design</h3>
+        <p>Great rooms are designed, not improvised. Learn to shape sessions that create space for shifts to happen &mdash; and leave with your next high-stakes meeting designed and ready to run.</p>
+        <div class="prompt-chip"><span class="chip-label">Resources Included</span><span class="chip-title">A Complete System for Design</span><span class="chip-title">See &rarr; Be &rarr; Do Change Model</span><span class="chip-title">Session Design Templates</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5b. THE FIELD GUIDE ============ -->
+<section class="center">
+  <div class="container">
+    <p class="eyebrow">Included With Every Seat</p>
+    <h2>The Lead the Room Field Guide</h2>
+    <p class="lead">A professionally designed workbook shipped to your door &mdash; not a PDF, not a slide deck. Inside: the complete method, every exercise, session design templates, and the full AI prompt library. Annotate it in the room, return to it between sessions, and keep it working long after the programme ends.</p>
+    <div class="media-placeholder">[ Field Guide image to come ]</div>
+  </div>
+</section>
+
+<!-- ============ 6. TESTIMONIALS ============ -->
+<section>
+  <div class="container">
+    <h2 class="center">Loved by ambitious leaders</h2>
+
+    <div class="t-card">
+      <blockquote>"If you need to influence outcomes in rooms where you're not the most senior person, this is very much built for you. I found myself using the tools the very next week in real meetings."</blockquote>
+      <div class="person"><div class="p-avatar"><svg viewBox="0 0 24 24" width="26" height="26" fill="#ffffff" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2.25c-3.6 0-9 1.8-9 5.4V21h18v-1.35c0-3.6-5.4-5.4-9-5.4z"/></svg></div><span class="p-name">Rosanne McBrayer</span></div>
+    </div>
+    <div class="t-card">
+      <blockquote>"After just one session, I walked away with practical, actionable tactics I could immediately apply. It's rare to find a workshop that's not only insightful, but truly actionable the moment you leave."</blockquote>
+      <div class="person"><div class="p-avatar"><svg viewBox="0 0 24 24" width="26" height="26" fill="#ffffff" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2.25c-3.6 0-9 1.8-9 5.4V21h18v-1.35c0-3.6-5.4-5.4-9-5.4z"/></svg></div><span class="p-name">Denyse</span></div>
+    </div>
+    <div class="t-card">
+      <blockquote>"I feel much more confident in my ability to facilitate effectively &mdash; not just to guide discussions, but to truly provoke insight and galvanize change within groups. I would highly recommend this program to anyone looking to elevate their facilitation skills."</blockquote>
+      <div class="person"><div class="p-avatar"><svg viewBox="0 0 24 24" width="26" height="26" fill="#ffffff" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2.25c-3.6 0-9 1.8-9 5.4V21h18v-1.35c0-3.6-5.4-5.4-9-5.4z"/></svg></div><span class="p-name">Tracy Xiong-Morel</span></div>
+    </div>
+    <div class="t-card">
+      <blockquote>"I did (and do) consider myself a seasoned facilitator, so I was quite surprised at how useful and engaging the programme was. Whether you've been doing this for 1 year or 10, this is the programme for you!"</blockquote>
+      <div class="person"><div class="p-avatar"><svg viewBox="0 0 24 24" width="26" height="26" fill="#ffffff" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2.25c-3.6 0-9 1.8-9 5.4V21h18v-1.35c0-3.6-5.4-5.4-9-5.4z"/></svg></div><span class="p-name">Rina G Lynch</span></div>
+    </div>
+    <div class="t-card">
+      <blockquote>"Placeholder testimonial quote. Two or three sentences of enthusiastic praise describing the transformation the person experienced."</blockquote>
+      <div class="person"><div class="p-avatar"><svg viewBox="0 0 24 24" width="26" height="26" fill="#ffffff" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2.25c-3.6 0-9 1.8-9 5.4V21h18v-1.35c0-3.6-5.4-5.4-9-5.4z"/></svg></div><span class="p-name">Stefani Okamoto</span></div>
+    </div>
+    <div class="t-card">
+      <blockquote>"Placeholder testimonial quote. Two or three sentences of enthusiastic praise describing the transformation the person experienced."</blockquote>
+      <div class="person"><div class="p-avatar"><svg viewBox="0 0 24 24" width="26" height="26" fill="#ffffff" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12zm0 2.25c-3.6 0-9 1.8-9 5.4V21h18v-1.35c0-3.6-5.4-5.4-9-5.4z"/></svg></div><span class="p-name">Marlenne Johnson</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. EVERYTHING YOU GET ============ -->
+<section>
+  <div class="container">
+    <p class="get-intro center">Placeholder intro line about the outcome and feeling the buyer gets when they join.</p>
+    <h2 class="center" style="margin-top:18px;">Here's everything you will get when you join:</h2>
+
+    <ul class="get-list">
+      <li><span class="icon">✓</span><strong>Placeholder Deliverable One ($000 Value).</strong> Placeholder description of what this item is and why it is valuable to the buyer.</li>
+      <li><span class="icon">✓</span><strong>Placeholder Deliverable Two ($0,000 Value).</strong> Placeholder description of what this item is and why it is valuable to the buyer.</li>
+      <li><span class="icon">✓</span><strong>Placeholder Deliverable Three ($000 Value).</strong> Placeholder description of what this item is and why it is valuable to the buyer.</li>
+      <li><span class="icon">✓</span><strong>Placeholder Deliverable Four ($000 Value).</strong> Placeholder description of what this item is and why it is valuable to the buyer.</li>
+      <li class="bonus"><span class="icon">★</span><strong>LIFETIME ACCESS</strong> to the placeholder curriculum, session replays, and library of bonuses.</li>
+      <li class="bonus"><span class="icon">★</span><strong>[BONUS] Placeholder Bonus One ($000 Value).</strong> Placeholder description of the bonus and how the buyer can use it.</li>
+      <li class="bonus"><span class="icon">★</span><strong>[BONUS] Placeholder Bonus Two ($000 Value).</strong> Placeholder description of the bonus and how the buyer can use it.</li>
+      <li class="bonus"><span class="icon">★</span><strong>[BONUS] Placeholder Bonus Three ($000 Value).</strong> Placeholder description of the bonus and how the buyer can use it.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 8. VALUE STACK & PRICE ============ -->
+<section id="pricing">
+  <div class="container">
+    <div class="center">
+      <p class="eyebrow">Join Now</p>
+      <h2>Want to lead any room in 2 weeks?</h2>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-row"><span>Placeholder Line Item One</span><span class="val">$0,000</span></div>
+      <div class="stack-row"><span>Placeholder Line Item Two</span><span class="val">$000</span></div>
+      <div class="stack-row"><span>Placeholder Line Item Three</span><span class="val">$000</span></div>
+      <div class="stack-row"><span>Placeholder Line Item Four</span><span class="val">$000</span></div>
+      <div class="stack-row"><span>Placeholder Line Item Five</span><span class="val">$000</span></div>
+      <div class="stack-row"><span>Placeholder Line Item Six</span><span class="val">Priceless</span></div>
+      <div class="stack-row"><span>BONUS: Placeholder Bonus One</span><span class="val">$000</span></div>
+      <div class="stack-row"><span>BONUS: Placeholder Bonus Two</span><span class="val">$000</span></div>
+      <div class="stack-total"><span>Total Value</span><span class="val">$0,000</span></div>
+    </div>
+    <div class="price-banner">
+      <p class="label">Your Price Today</p>
+      <p class="price">&pound;250</p>
+    </div>
+
+    <div class="stack-cta"><a class="btn" href="https://pfnl.co/8m8y1ah">Join the Sprint</a></div>
+  </div>
+</section>
+
+<!-- ============ 9. FAQ ============ -->
+<section>
+  <div class="container">
+    <p class="eyebrow">Frequently Asked Questions</p>
+    <h2>Still wondering?</h2>
+
+    <div class="faq-list">
+      <details class="faq-item"><summary>How much time do I need?<span class="plus">+</span></summary><div class="answer">Two 90-minute live labs per week for two weeks &mdash; four sessions in total. The only homework is using the tools in the flow of work.</div></details>
+      <details class="faq-item"><summary>What if I can't attend live?<span class="plus">+</span></summary><div class="answer">Every session has recordings and other videos you can access immediately, so you can catch up before the next lab. That said, the labs are where the action happens &mdash; attend live whenever you can.</div></details>
+      <details class="faq-item"><summary>I'm not naturally confident in front of a room. Can I still do this?<span class="plus">+</span></summary><div class="answer">That's exactly what the first session is for. Confidence in a room is a practice, not a personality trait &mdash; and you'll leave with a repeatable loop for building it.</div></details>
+      <details class="faq-item"><summary>Do I need a leadership title or direct reports?<span class="plus">+</span></summary><div class="answer">No. Lead the Room is built for people who lead with influence rather than authority &mdash; chiefs of staff, program leads, experts, and managers who need to move rooms they don't command.</div></details>
+      <details class="faq-item"><summary>Is this just facilitation training?<span class="plus">+</span></summary><div class="answer">No &mdash; it's a leadership method. You'll pick up facilitation techniques along the way, but the outcome is bigger: leading any room toward the result you need.</div></details>
+      <details class="faq-item"><summary>How is this different from presentation-skills courses?<span class="plus">+</span></summary><div class="answer">Presentation training teaches you to deliver polished content at a room. Lead the Room teaches you to work with the room &mdash; reading it, moving it, and reaching outcomes together.</div></details>
+      <details class="faq-item"><summary>How long do I have access?<span class="plus">+</span></summary><div class="answer">You keep lifetime access to the session recordings and resources, plus ongoing access to the community &mdash; and the Field Guide is yours on your shelf.</div></details>
+      <details class="faq-item"><summary>Is there a guarantee?<span class="plus">+</span></summary><div class="answer">Yes. Join the first lab, and if it's not right for you, let us know within 48 hours for a full refund &mdash; no questions asked.</div></details>
+    </div>
+  </div>
+</section>
+
+<footer>placeholder-domain.com</footer>
+
+<!-- ============ STICKY CTA ============ -->
+<div class="sticky-cta"><a class="btn" href="https://pfnl.co/8m8y1ah">Join the Sprint</a></div>
+
+<script>
+  // Cart closes at midnight at the end of Sunday 31 August 2026 (visitor's local time)
+  var cartCloses = new Date(2026, 8, 1, 0, 0, 0); // months are 0-indexed: 8 = September
+
+  function pad(n) { return String(n).padStart(2, "0"); }
+
+  function tick() {
+    var diff = cartCloses - new Date();
+    if (diff < 0) diff = 0;
+    var days = Math.floor(diff / 86400000);
+    var hrs  = Math.floor(diff % 86400000 / 3600000);
+    var min  = Math.floor(diff % 3600000 / 60000);
+    var sec  = Math.floor(diff % 60000 / 1000);
+    document.getElementById("cd-days").textContent = pad(days);
+    document.getElementById("cd-hrs").textContent  = pad(hrs);
+    document.getElementById("cd-min").textContent  = pad(min);
+    document.getElementById("cd-sec").textContent  = pad(sec);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
