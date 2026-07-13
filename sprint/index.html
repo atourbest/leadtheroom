@@ -220,6 +220,12 @@
     margin-bottom: 4px;
   }
   .prompt-chip .chip-title { display: block; font-weight: 700; font-size: 16px; line-height: 1.9; }
+  .prompt-chip .chip-title::before {
+    content: "✓";
+    color: #2ecc71;
+    font-weight: 800;
+    margin-right: 10px;
+  }
 
   /* ---------- testimonials ---------- */
   .t-card {
@@ -321,6 +327,87 @@
   .faq-item[open] summary .plus { transform: rotate(45deg); }
   .faq-item .answer { padding: 0 32px 30px; color: var(--muted); font-size: 17px; }
 
+  /* ---------- what it's NOT ---------- */
+  .not-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 44px 40px 30px;
+    margin-top: 48px;
+  }
+  .not-card ul { list-style: none; }
+  .not-card li {
+    position: relative;
+    padding-left: 42px;
+    margin-bottom: 24px;
+    color: var(--muted);
+    font-size: 18px;
+    text-align: left;
+  }
+  .not-card li strong { color: var(--text); }
+  .not-card li .x {
+    position: absolute; left: 0; top: 0;
+    color: var(--accent);
+    font-weight: 800; font-size: 20px;
+  }
+
+  /* ---------- mentors ---------- */
+  .mentor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 48px;
+  }
+  .mentor-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 40px 34px;
+    text-align: center;
+  }
+  .mentor-card .photo {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 0 0 3px var(--accent), 0 0 30px rgba(224,47,117,.3);
+  }
+  .mentor-card h3 { font-size: 24px; font-weight: 800; margin-top: 24px; }
+  .mentor-card .role {
+    color: var(--accent);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .mentor-card p { color: var(--muted); font-size: 16px; margin-top: 18px; text-align: left; }
+
+  /* ---------- stats bar ---------- */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+    text-align: center;
+  }
+  .stat {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 28px 10px 24px;
+  }
+  .stat .s-num {
+    font-size: 32px; font-weight: 800;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat .s-label { color: var(--muted); font-size: 13px; margin-top: 6px; line-height: 1.4; }
+
+  .cohort-note { text-align: center; color: var(--muted); font-size: 16px; margin-top: 26px; }
+
+  @media (max-width: 600px) {
+    .mentor-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
   /* ---------- placeholder media block ---------- */
   .media-placeholder {
     background: var(--card);
@@ -413,6 +500,20 @@
   </div>
 </section>
 
+<!-- ============ 3b. WHAT IT'S NOT ============ -->
+<section class="center" style="padding-top:0;">
+  <div class="container">
+    <h2>Here's what Lead the Room is <span style="color:var(--accent);">NOT</span>:</h2>
+    <div class="not-card">
+      <ul>
+        <li><span class="x">✕</span>It's <strong>NOT</strong> a generic facilitation course full of tips and techniques you've already heard a hundred times before.</li>
+        <li><span class="x">✕</span>It's <strong>NOT</strong> a self-paced video library where you watch alone, hope something sticks, and never actually practise in a real room.</li>
+        <li><span class="x">✕</span>It's <strong>NOT</strong> built for experienced facilitators or leaders with positional authority.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ============ 4. QUIZ ============ -->
 <section>
   <div class="container">
@@ -485,6 +586,41 @@
     <h2>The Lead the Room Field Guide</h2>
     <p class="lead">A professionally designed workbook shipped to your door &mdash; not a PDF, not a slide deck. Inside: the complete method, every exercise, session design templates, and the full AI prompt library. Annotate it in the room, return to it between sessions, and keep it working long after the programme ends.</p>
     <div class="media-placeholder">[ Field Guide image to come ]</div>
+
+    <p class="eyebrow" style="margin-top:70px;">Yours To Keep</p>
+    <h2>The Lead the Room Video Library</h2>
+    <p class="lead">On-demand video sessions covering confidence patterns, advanced facilitation tactics, the Four Disciplines of a Skilful Facilitator, preparation systems, and using AI as a facilitation partner. Yours to keep and revisit after the programme ends.</p>
+  </div>
+</section>
+
+<!-- ============ 5c. MEET THE MENTORS ============ -->
+<section>
+  <div class="container">
+    <div class="center">
+      <p class="eyebrow">Who's Teaching This</p>
+      <h2>Meet the Mentors</h2>
+      <p class="lead">Two practitioners who've spent decades in the room &mdash; not writing about facilitation, but doing it. The Lead the Room Method is built from that experience.</p>
+    </div>
+    <div class="mentor-grid">
+      <div class="mentor-card">
+        <img class="photo" src="https://facilitationedge.com/michele-skogerboe.jpg" alt="Michele Skogerboe">
+        <h3>Michele Skogerboe</h3>
+        <p class="role">Lead the Room Mentor</p>
+        <p>Michele designs and delivers experiences that challenge how leaders think, behave, and show up. She doesn't lecture from the front of the room &mdash; she creates immersive programmes that surface hard truths and help leaders practise courage, curiosity, and care. Her work draws from psychology, systems thinking, and human-centred design, always grounded in evidence and translated for real rooms.</p>
+      </div>
+      <div class="mentor-card">
+        <img class="photo" src="https://facilitationedge.com/jason-moore.jpg" alt="Jason Moore">
+        <h3>Jason Moore</h3>
+        <p class="role">Lead the Room Mentor</p>
+        <p>Jason has spent more than two decades facilitating leadership experiences for organisations including Microsoft, HSBC, Netflix, Equinix, and Goldman Sachs &mdash; reaching more than 500,000 people across 50+ countries. His style is energising, rigorous, and deeply human. He brings as much care to what shifts in people as to what gets decided.</p>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="s-num">30+</div><div class="s-label">Years in the room</div></div>
+      <div class="stat"><div class="s-num">500k+</div><div class="s-label">People reached</div></div>
+      <div class="stat"><div class="s-num">50+</div><div class="s-label">Countries</div></div>
+      <div class="stat"><div class="s-num">100+</div><div class="s-label">Organisations</div></div>
+    </div>
   </div>
 </section>
 
@@ -564,6 +700,7 @@
     </div>
 
     <div class="stack-cta"><a class="btn" href="https://pfnl.co/8m8y1ah">Join the Sprint</a></div>
+    <p class="cohort-note">Each cohort is intentionally limited, so every participant gets real conversation with peers who take this work as seriously as you do.</p>
   </div>
 </section>
 
@@ -586,7 +723,7 @@
   </div>
 </section>
 
-<footer>placeholder-domain.com</footer>
+<footer>Lead the Room &nbsp;&middot;&nbsp; &copy; 2026 AT OUR BEST LTD. All rights reserved.</footer>
 
 <!-- ============ STICKY CTA ============ -->
 <div class="sticky-cta"><a class="btn" href="https://pfnl.co/8m8y1ah">Join the Sprint</a></div>
