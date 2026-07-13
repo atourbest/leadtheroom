@@ -71,8 +71,22 @@
   }
   .btn:hover { transform: translateY(-2px); box-shadow: 0 0 55px rgba(224, 47, 117, .5); }
 
+  /* ---------- logotype ---------- */
+  .logotype {
+    text-align: center;
+    padding: 28px 24px 0;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -.01em;
+  }
+  .logotype .mark {
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   /* ---------- hero ---------- */
-  .hero { padding-top: 110px; text-align: center; }
+  .hero { padding-top: 45px; text-align: center; }
   .badge {
     display: inline-flex;
     align-items: center;
@@ -339,6 +353,9 @@
 </style>
 </head>
 <body>
+
+<!-- ============ LOGOTYPE ============ -->
+<header class="logotype">Lead the Room <span class="mark">Sprint</span></header>
 
 <!-- ============ 1. HERO ============ -->
 <section class="hero">
